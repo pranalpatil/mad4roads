@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mad4RoadForm));
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.passwordLabel = new System.Windows.Forms.Label();
@@ -69,12 +70,14 @@
             this.summaryButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonLogoPictureBox = new System.Windows.Forms.PictureBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.investmentSelectionGroupBox.SuspendLayout();
             this.investorDetailsGroupBox.SuspendLayout();
             this.searchTransactionGroupBox.SuspendLayout();
             this.summaryGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonLogoPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // logoPictureBox
@@ -296,6 +299,7 @@
             this.submitButton.TabIndex = 10;
             this.submitButton.Text = "&Submit";
             this.submitButton.UseVisualStyleBackColor = true;
+            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
             // 
             // emailIDTextBox
             // 
@@ -521,6 +525,10 @@
             this.buttonLogoPictureBox.TabStop = false;
             this.buttonLogoPictureBox.Visible = false;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // mad4RoadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -547,6 +555,7 @@
             this.searchTransactionGroupBox.PerformLayout();
             this.summaryGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.buttonLogoPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -594,6 +603,7 @@
         private System.Windows.Forms.Label monthlyInterestLabel;
         private System.Windows.Forms.Label interestRateLabel;
         private System.Windows.Forms.Label periodLabel;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
 

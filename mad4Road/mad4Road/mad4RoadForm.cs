@@ -4,32 +4,39 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace mad4Road
 {
     public partial class mad4RoadForm : Form
     {
-        
+
         public const string PASSWORD = "";//2Fast4U#
+        public const string FILENAME = "transactionData.txt";
         public mad4RoadForm()
         {
             InitializeComponent();
 
         }
+
         const int EXPANSION = 100, WIDTHSTART = 580, HEIGHTSTART = 400,
                     HEIGHTEXPAND = 660, WIDTHEXPAND = 1000;
         Boolean FormWidthExpanded = false;
         const int YEAR1 = 1, YEAR3 = 3, YEAR5 = 5, YEAR7 = 7;
-        const decimal   INTREST6PCT = 6.0m, INTREST6_5PCT = 6.5m, INTREST7PCT = 7.0m, INTREST7_5PCT = 7.5m, INTREST8PCT = 8.0m,
+        const decimal INTREST6PCT = 6.0m, INTREST6_5PCT = 6.5m, INTREST7PCT = 7.0m, INTREST7_5PCT = 7.5m, INTREST8PCT = 8.0m,
                         INTREST8_5PCT = 8.5m, INTREST9PCT = 9.0m, INTREST9_5PCT = 9.5m, INTREST8_75PCT = 8.75m, INTREST9_1PCT = 9.1m,
                         INTREST9_25PCT = 9.25m, Months = 12;
-        int lowerBound=40000, uperBound=80000, selectTermIndex=0, loginattempt=0, passwordAttempt=1 ;
-        string  emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "";
+
+       
+
+        int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, loginattempt = 0, passwordAttempt = 1;
+        string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "";
         decimal emi1 = 0, emi3 = 0, emi5 = 0, emi7 = 0, YearInMonth1 = 12, YearInMonth3 = 36, YearInMonth5 = 60, YearInMonth7 = 84;
         decimal TOTALINTREST1 = 0.0m, TOTALINTREST3 = 0.0m, TOTALINTREST5 = 0.0m, TOTALINTREST7 = 0.0m, TOTALREPAYMENTS1 = 0.0m, TOTALREPAYMENTS3 = 0.0m,
                 TOTALREPAYMENTS5 = 0.0m, TOTALREPAYMENTS7 = 0.0m;
@@ -64,13 +71,13 @@ namespace mad4Road
                 summaryGroupBox.Enabled=false;
 
             }
-             else
-             {
+            else
+            {
 
                 MessageBox.Show("You entered wrong password. \n "+passwordAttempt+"\n out of 2 Attemps");
 
                 passwordAttempt+=1;
-                
+
                 if (passwordAttempt==3)
                 {
                     MessageBox.Show("You entered wrong password. \n "+passwordAttempt+"\n out of 2 Attemps");
@@ -79,7 +86,7 @@ namespace mad4Road
 
             }
 
-            
+
 
 
 
@@ -107,7 +114,7 @@ namespace mad4Road
         }
 
         private void displayButton_Click(object sender, EventArgs e)
-        {   
+        {
             decimal investAmount = Convert.ToDecimal(investmentAmountTextBox.Text);
 
 
@@ -127,7 +134,7 @@ namespace mad4Road
                 TOTALINTREST5=emi5*YearInMonth5;
                 TOTALINTREST7=emi7*YearInMonth7;
                 TOTALREPAYMENTS1 = TOTALINTREST1+investAmount;
-                TOTALREPAYMENTS3 = TOTALINTREST3+investAmount; 
+                TOTALREPAYMENTS3 = TOTALINTREST3+investAmount;
                 TOTALREPAYMENTS5 = TOTALINTREST5+investAmount;
                 TOTALREPAYMENTS7 = TOTALINTREST7+investAmount;
 
@@ -140,7 +147,7 @@ namespace mad4Road
                 //repaymentListBOX.Items.Add(YEAR5 + "Year\t" + INTREST7PCT + "%\t" + emi5.ToString("0.00")+ "\t" + TOTALINTREST5.ToString("0.00")+ "\t" + TOTALREPAYMENTS5.ToString("0.00"));
                 //repaymentListBOX.Items.Add(YEAR7 + "Year\t" + INTREST7_5PCT + "%\t" + emi7.ToString("0.00")+ "\t" + TOTALINTREST7.ToString("0.00")+ "\t" + TOTALREPAYMENTS7.ToString("0.00"));
             }
-            else if(investAmount >= lowerBound && investAmount < uperBound)
+            else if (investAmount >= lowerBound && investAmount < uperBound)
             {
                 emi1 = calculateEMI(YEAR1, INTREST8PCT, investAmount);
                 emi3 = calculateEMI(YEAR3, INTREST8_5PCT, investAmount);
@@ -189,10 +196,10 @@ namespace mad4Road
                 //repaymentListBOX.Items.Add(YEAR3 + "Year\t" + INTREST8_75PCT + "%\t" + emi3.ToString("0.00")+ "\t" + TOTALINTREST3.ToString("0.00")+ "\t" + TOTALREPAYMENTS3.ToString("0.00"));
                 //repaymentListBOX.Items.Add(YEAR5 + "Year\t" + INTREST9_1PCT + "%\t" + emi5.ToString("0.00")+ "\t" + TOTALINTREST5.ToString("0.00")+ "\t" + TOTALREPAYMENTS5.ToString("0.00"));
                 //repaymentListBOX.Items.Add(YEAR7 + "Year\t" + INTREST9_25PCT + "%\t" + emi7.ToString("0.00")+ "\t" + TOTALINTREST7.ToString("0.00")+ "\t" + TOTALREPAYMENTS7.ToString("0.00"));
-               
-                
+
+
             }
-            
+
 
 
 
@@ -218,50 +225,79 @@ namespace mad4Road
             int x = 0;
             Random random = new Random();
 
-            return random.Next(10000,100000).ToString();
+            return random.Next(10000, 100000).ToString();
         }
-        
+
         private void proceedButton_Click(object sender, EventArgs e)
         {
-            
 
-            
-                if ((repaymentListBOX.SelectedIndex !=-1))
+
+
+            if ((repaymentListBOX.SelectedIndex !=-1))
+            {
+                selectTermIndex = repaymentListBOX.SelectedIndex;
+                switch (selectTermIndex)
                 {
-                    selectTermIndex = repaymentListBOX.SelectedIndex;
-                    switch (selectTermIndex)
-                    {
-                        case 0:
-                            emiSwitch=emi1.ToString(); totalInterestSwitch=TOTALINTREST1.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS1.ToString();
-                            break;
-                        case 1:
-                            emiSwitch=emi3.ToString(); totalInterestSwitch=TOTALINTREST3.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS3.ToString();
-                            break;
-                        case 2:
-                            emiSwitch=emi5.ToString(); totalInterestSwitch=TOTALINTREST5.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS5.ToString();
-                            break;
-                        case 4:
-                            emiSwitch=emi7.ToString(); totalInterestSwitch=TOTALINTREST7.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS7.ToString();
-                            break;
+                    case 0:
+                        emiSwitch=emi1.ToString(); totalInterestSwitch=TOTALINTREST1.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS1.ToString();
+                        break;
+                    case 1:
+                        emiSwitch=emi3.ToString(); totalInterestSwitch=TOTALINTREST3.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS3.ToString();
+                        break;
+                    case 2:
+                        emiSwitch=emi5.ToString(); totalInterestSwitch=TOTALINTREST5.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS5.ToString();
+                        break;
+                    case 4:
+                        emiSwitch=emi7.ToString(); totalInterestSwitch=TOTALINTREST7.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS7.ToString();
+                        break;
 
-                    }
-                    //searchTransactionLabel.Text= term3;
-                    investorDetailsGroupBox.Enabled=true;
-                    investmentSelectionGroupBox.Enabled=false;
-                    transactionNoLabel.Text=getRandomTransactionNo();
-                    
+                }
+                //searchTransactionLabel.Text= term3;
+                investorDetailsGroupBox.Enabled=true;
+                investmentSelectionGroupBox.Enabled=false;
+                transactionNoLabel.Text=getRandomTransactionNo();
+
             }
-            
+
             else
             {
                 MessageBox.Show("Please Select the Loan term", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 repaymentListBOX.Focus();
             }
 
-            
+
+
+
 
 
         }
-    }
+        
+        private void submitButton_Click(object sender, EventArgs e)
+        {
+            string investorName, investorPostCode, investorPhone, investorEmail;
 
+            //validName(investorNameTextBox.Text);
+            
+
+        }
+
+        //public bool validName(string n)
+        //{
+        //    Regex check = new Regex(@"^([A-Z][a-z-A-z]+)$");
+        //    bool valid = false;
+        //    valid=check.IsMatch(n);
+        //    if (valid==true)
+        //    {
+        //        return valid;
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("check name");
+        //    }
+        //}
+        
+
+    }
 }
+
+
