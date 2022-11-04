@@ -39,14 +39,18 @@ namespace mad4Road
         const decimal INTREST6PCT = 6.0m, INTREST6_5PCT = 6.5m, INTREST7PCT = 7.0m, INTREST7_5PCT = 7.5m, INTREST8PCT = 8.0m,
                         INTREST8_5PCT = 8.5m, INTREST9PCT = 9.0m, INTREST9_5PCT = 9.5m, INTREST8_75PCT = 8.75m, INTREST9_1PCT = 9.1m,
                         INTREST9_25PCT = 9.25m, Months = 12;
+
+        
+
         string rate;
 
 
-        int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, loginattempt = 0, passwordAttempt = 1, yearSwitch = 0, intrestPerSwitch=0;
-        string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "";
+        int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, loginattempt = 0, passwordAttempt = 1, yearSwitch = 0, intrestPerSwitch = 0;
+        string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "", transactionId = "";
         decimal emi1 = 0, emi3 = 0, emi5 = 0, emi7 = 0, YearInMonth1 = 12, YearInMonth3 = 36, YearInMonth5 = 60, YearInMonth7 = 84;
         decimal TOTALINTREST1 = 0.0m, TOTALINTREST3 = 0.0m, TOTALINTREST5 = 0.0m, TOTALINTREST7 = 0.0m, TOTALREPAYMENTS1 = 0.0m, TOTALREPAYMENTS3 = 0.0m,
                 TOTALREPAYMENTS5 = 0.0m, TOTALREPAYMENTS7 = 0.0m;
+
 
         private void loginButton_Click(object sender, EventArgs e)
         {
@@ -243,7 +247,7 @@ namespace mad4Road
             if ((repaymentListBOX.SelectedIndex !=-1))
             {
                 selectTermIndex = repaymentListBOX.SelectedIndex;
-                
+
                 switch (selectTermIndex)
                 {
                     case 0:
@@ -279,14 +283,14 @@ namespace mad4Road
 
 
         }
-        
+
         private void submitButton_Click(object sender, EventArgs e)
         {
 
-            StreamWriter write= File.AppendText(filepath);
+            StreamWriter write = File.AppendText(filepath);
             using (write)
             {
-                write.WriteLine (transactionNoLabel.Text);
+                write.WriteLine(transactionNoLabel.Text);
                 write.WriteLine(emailIDTextBox.Text);
                 write.WriteLine(investorNameTextBox.Text);
                 write.WriteLine(postCodeTextBox.Text);
@@ -301,35 +305,61 @@ namespace mad4Road
 
 
 
-            //StreamWriter writer = new StreamWriter(filepath);
-            //    using (writer)
-            //    {
-            //        writer.WriteLine(transactionNoLabel.Text);
-            //    }
-
-
-            //validName(investorNameTextBox.Text);
+            searchTransactionGroupBox.Enabled=true;
 
 
         }
 
-        //public bool validName(string n)
-        //{
-        //    Regex check = new Regex(@"^([A-Z][a-z-A-z]+)$");
-        //    bool valid = false;
-        //    valid=check.IsMatch(n);
-        //    if (valid==true)
-        //    {
-        //        return valid;
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("check name");
-        //    }
-        //}
-        
 
+
+        private void searchTransactionButton_Click(object sender, EventArgs e)
+        {
+
+            StreamReader fileRead = new StreamReader(filepath);
+            string ID = Console.ReadLine();
+
+
+
+
+
+            using (fileRead)
+            {
+                string currentLineValue;
+                currentLineValue=fileRead.ReadLine();
+
+                while (currentLineValue != null)
+                {
+                    if (currentLineValue.Equals(currentLineValue))
+                    {
+                        for (int i = 0; i < 9; i++)
+                        {
+
+                        }
+                        Console.WriteLine(fileRead.ReadLine());
+                        Console.WriteLine(fileRead.ReadLine());
+                        Console.WriteLine(fileRead.ReadLine());
+                        break;
+                    }
+                    else
+                    {
+                        currentLineValue=fileRead.ReadLine();
+                    }
+                    searchTransactionListBox.Items.Add(currentLineValue);
+                }
+
+            }
+
+        }
+        private void clearTransactionButton_Click(object sender, EventArgs e)
+        {
+           
+                searchTransactionListBox.Items.Clear();
+            searchTransactionInputTextBox.Clear();
+        }
     }
+
+
+    
 }
 
 

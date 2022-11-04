@@ -65,12 +65,12 @@
             this.transactionNoSearchRadioButton = new System.Windows.Forms.RadioButton();
             this.emailSearchRadioButton = new System.Windows.Forms.RadioButton();
             this.transactionResultsLabel = new System.Windows.Forms.Label();
-            this.searchTransactionLabel = new System.Windows.Forms.Label();
             this.summaryGroupBox = new System.Windows.Forms.GroupBox();
             this.summaryButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.buttonLogoPictureBox = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.searchTransactionListBox = new System.Windows.Forms.ListBox();
+            this.summaryListBox = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.investmentSelectionGroupBox.SuspendLayout();
             this.investorDetailsGroupBox.SuspendLayout();
@@ -390,13 +390,13 @@
             // 
             // searchTransactionGroupBox
             // 
+            this.searchTransactionGroupBox.Controls.Add(this.searchTransactionListBox);
             this.searchTransactionGroupBox.Controls.Add(this.clearTransactionButton);
             this.searchTransactionGroupBox.Controls.Add(this.searchTransactionButton);
             this.searchTransactionGroupBox.Controls.Add(this.searchTransactionInputTextBox);
             this.searchTransactionGroupBox.Controls.Add(this.transactionNoSearchRadioButton);
             this.searchTransactionGroupBox.Controls.Add(this.emailSearchRadioButton);
             this.searchTransactionGroupBox.Controls.Add(this.transactionResultsLabel);
-            this.searchTransactionGroupBox.Controls.Add(this.searchTransactionLabel);
             this.searchTransactionGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchTransactionGroupBox.Location = new System.Drawing.Point(65, 534);
             this.searchTransactionGroupBox.Name = "searchTransactionGroupBox";
@@ -416,6 +416,7 @@
             this.clearTransactionButton.TabIndex = 16;
             this.clearTransactionButton.Text = "Cl&ear";
             this.clearTransactionButton.UseVisualStyleBackColor = true;
+            this.clearTransactionButton.Click += new System.EventHandler(this.clearTransactionButton_Click);
             // 
             // searchTransactionButton
             // 
@@ -427,6 +428,7 @@
             this.searchTransactionButton.TabIndex = 8;
             this.searchTransactionButton.Text = "Sear&ch";
             this.searchTransactionButton.UseVisualStyleBackColor = true;
+            this.searchTransactionButton.Click += new System.EventHandler(this.searchTransactionButton_Click);
             // 
             // searchTransactionInputTextBox
             // 
@@ -470,20 +472,10 @@
             this.transactionResultsLabel.TabIndex = 13;
             this.transactionResultsLabel.Text = "Results";
             // 
-            // searchTransactionLabel
-            // 
-            this.searchTransactionLabel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.searchTransactionLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchTransactionLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.searchTransactionLabel.Location = new System.Drawing.Point(416, 53);
-            this.searchTransactionLabel.Name = "searchTransactionLabel";
-            this.searchTransactionLabel.Size = new System.Drawing.Size(466, 355);
-            this.searchTransactionLabel.TabIndex = 12;
-            // 
             // summaryGroupBox
             // 
+            this.summaryGroupBox.Controls.Add(this.summaryListBox);
             this.summaryGroupBox.Controls.Add(this.summaryButton);
-            this.summaryGroupBox.Controls.Add(this.label1);
             this.summaryGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.summaryGroupBox.Location = new System.Drawing.Point(1046, 534);
             this.summaryGroupBox.Name = "summaryGroupBox";
@@ -504,16 +496,6 @@
             this.summaryButton.Text = "S&ummary";
             this.summaryButton.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(242, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(477, 381);
-            this.label1.TabIndex = 13;
-            // 
             // buttonLogoPictureBox
             // 
             this.buttonLogoPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("buttonLogoPictureBox.Image")));
@@ -528,6 +510,24 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // searchTransactionListBox
+            // 
+            this.searchTransactionListBox.FormattingEnabled = true;
+            this.searchTransactionListBox.ItemHeight = 29;
+            this.searchTransactionListBox.Location = new System.Drawing.Point(427, 55);
+            this.searchTransactionListBox.Name = "searchTransactionListBox";
+            this.searchTransactionListBox.Size = new System.Drawing.Size(442, 323);
+            this.searchTransactionListBox.TabIndex = 17;
+            // 
+            // summaryListBox
+            // 
+            this.summaryListBox.FormattingEnabled = true;
+            this.summaryListBox.ItemHeight = 29;
+            this.summaryListBox.Location = new System.Drawing.Point(253, 23);
+            this.summaryListBox.Name = "summaryListBox";
+            this.summaryListBox.Size = new System.Drawing.Size(410, 352);
+            this.summaryListBox.TabIndex = 18;
             // 
             // mad4RoadForm
             // 
@@ -593,8 +593,6 @@
         private System.Windows.Forms.RadioButton transactionNoSearchRadioButton;
         private System.Windows.Forms.RadioButton emailSearchRadioButton;
         private System.Windows.Forms.Label transactionResultsLabel;
-        private System.Windows.Forms.Label searchTransactionLabel;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button clearTransactionButton;
         private System.Windows.Forms.Button searchTransactionButton;
         private System.Windows.Forms.Button summaryButton;
@@ -604,6 +602,8 @@
         private System.Windows.Forms.Label interestRateLabel;
         private System.Windows.Forms.Label periodLabel;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ListBox searchTransactionListBox;
+        private System.Windows.Forms.ListBox summaryListBox;
     }
 }
 
