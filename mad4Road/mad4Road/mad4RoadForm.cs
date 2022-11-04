@@ -11,6 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Diagnostics;
+using System.Security.Cryptography;
+using System.IO;
+using System.Xml.Linq;
 
 namespace mad4Road
 {
@@ -18,7 +23,9 @@ namespace mad4Road
     {
 
         public const string PASSWORD = "";//2Fast4U#
-        public const string FILENAME = "transactionData.txt";
+        string filepath = @"\\Mac\Home\Desktop\Windows Data\University\Assignment 3\Final File\mad4roads_assign3\mad4Road\mad4Road\bin\Debug\transactionData.txt";
+
+
         public mad4RoadForm()
         {
             InitializeComponent();
@@ -32,10 +39,10 @@ namespace mad4Road
         const decimal INTREST6PCT = 6.0m, INTREST6_5PCT = 6.5m, INTREST7PCT = 7.0m, INTREST7_5PCT = 7.5m, INTREST8PCT = 8.0m,
                         INTREST8_5PCT = 8.5m, INTREST9PCT = 9.0m, INTREST9_5PCT = 9.5m, INTREST8_75PCT = 8.75m, INTREST9_1PCT = 9.1m,
                         INTREST9_25PCT = 9.25m, Months = 12;
+        string rate;
 
-       
 
-        int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, loginattempt = 0, passwordAttempt = 1;
+        int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, loginattempt = 0, passwordAttempt = 1, yearSwitch = 0, intrestPerSwitch=0;
         string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "";
         decimal emi1 = 0, emi3 = 0, emi5 = 0, emi7 = 0, YearInMonth1 = 12, YearInMonth3 = 36, YearInMonth5 = 60, YearInMonth7 = 84;
         decimal TOTALINTREST1 = 0.0m, TOTALINTREST3 = 0.0m, TOTALINTREST5 = 0.0m, TOTALINTREST7 = 0.0m, TOTALREPAYMENTS1 = 0.0m, TOTALREPAYMENTS3 = 0.0m,
@@ -236,19 +243,20 @@ namespace mad4Road
             if ((repaymentListBOX.SelectedIndex !=-1))
             {
                 selectTermIndex = repaymentListBOX.SelectedIndex;
+                
                 switch (selectTermIndex)
                 {
                     case 0:
-                        emiSwitch=emi1.ToString(); totalInterestSwitch=TOTALINTREST1.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS1.ToString();
+                        yearSwitch=YEAR1; emiSwitch=emi1.ToString(); totalInterestSwitch=TOTALINTREST1.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS1.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
                         break;
                     case 1:
-                        emiSwitch=emi3.ToString(); totalInterestSwitch=TOTALINTREST3.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS3.ToString();
+                        yearSwitch=YEAR3; emiSwitch=emi3.ToString(); totalInterestSwitch=TOTALINTREST3.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS3.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
                         break;
                     case 2:
-                        emiSwitch=emi5.ToString(); totalInterestSwitch=TOTALINTREST5.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS5.ToString();
+                        yearSwitch=YEAR5; emiSwitch=emi5.ToString(); totalInterestSwitch=TOTALINTREST5.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS5.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
                         break;
                     case 4:
-                        emiSwitch=emi7.ToString(); totalInterestSwitch=TOTALINTREST7.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS7.ToString();
+                        yearSwitch=YEAR7; emiSwitch=emi7.ToString(); totalInterestSwitch=TOTALINTREST7.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS7.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
                         break;
 
                 }
@@ -274,10 +282,34 @@ namespace mad4Road
         
         private void submitButton_Click(object sender, EventArgs e)
         {
-            string investorName, investorPostCode, investorPhone, investorEmail;
+
+            StreamWriter write= File.AppendText(filepath);
+            using (write)
+            {
+                write.WriteLine (transactionNoLabel.Text);
+                write.WriteLine(emailIDTextBox.Text);
+                write.WriteLine(investorNameTextBox.Text);
+                write.WriteLine(postCodeTextBox.Text);
+                write.WriteLine(phoneNumberTextBox.Text);
+                write.WriteLine(investmentAmountTextBox.Text);
+                write.WriteLine(emiSwitch);
+                write.WriteLine(yearSwitch*12);
+                write.WriteLine(totalRepaymentsSwitch);
+                write.WriteLine(rate);
+
+            }
+
+
+
+            //StreamWriter writer = new StreamWriter(filepath);
+            //    using (writer)
+            //    {
+            //        writer.WriteLine(transactionNoLabel.Text);
+            //    }
+
 
             //validName(investorNameTextBox.Text);
-            
+
 
         }
 
