@@ -311,43 +311,29 @@ namespace mad4Road
         }
 
 
-
+         
         private void searchTransactionButton_Click(object sender, EventArgs e)
         {
-
-            StreamReader fileRead = new StreamReader(filepath);
-            string ID = Console.ReadLine();
-
-
-
-
-
-            using (fileRead)
+            try
             {
-                string currentLineValue;
-                currentLineValue=fileRead.ReadLine();
-
-                while (currentLineValue != null)
+                string transactionNo;
+                StreamReader InputFile;
+                InputFile = File.OpenText(filepath);
+                searchTransactionListBox.Items.Clear();
+                while (!InputFile.EndOfStream)
                 {
-                    if (currentLineValue.Equals(currentLineValue))
-                    {
-                        for (int i = 0; i < 9; i++)
-                        {
+                    transactionNo = InputFile.ReadLine();
 
-                        }
-                        Console.WriteLine(fileRead.ReadLine());
-                        Console.WriteLine(fileRead.ReadLine());
-                        Console.WriteLine(fileRead.ReadLine());
-                        break;
-                    }
-                    else
-                    {
-                        currentLineValue=fileRead.ReadLine();
-                    }
-                    searchTransactionListBox.Items.Add(currentLineValue);
+                    searchTransactionListBox.Items.Add(transactionNo);
                 }
-
+                InputFile.Close();
             }
+            catch
+            {
+                MessageBox.Show("wrong");
+            }
+
+            
 
         }
         private void clearTransactionButton_Click(object sender, EventArgs e)
