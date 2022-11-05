@@ -78,8 +78,8 @@ namespace mad4Road
                 summaryGroupBox.Visible=true;
                 buttonLogoPictureBox.Visible=true;
                 investorDetailsGroupBox.Enabled=false;
-                searchTransactionGroupBox.Enabled=false;
-                summaryGroupBox.Enabled=false;
+                searchTransactionGroupBox.Enabled=true;
+                summaryGroupBox.Enabled=true;
 
             }
             else
@@ -290,17 +290,16 @@ namespace mad4Road
             StreamWriter write = File.AppendText(filepath);
             using (write)
             {
-                write.WriteLine(transactionNoLabel.Text);
-                write.WriteLine(emailIDTextBox.Text);
-                write.WriteLine(investorNameTextBox.Text);
-                write.WriteLine(postCodeTextBox.Text);
-                write.WriteLine(phoneNumberTextBox.Text);
-                write.WriteLine(investmentAmountTextBox.Text);
-                write.WriteLine(emiSwitch);
-                write.WriteLine(yearSwitch*12);
-                write.WriteLine(totalRepaymentsSwitch);
-                write.WriteLine(rate);
-
+                write.WriteLine("Transaction number: " + transactionNoLabel.Text);
+                write.WriteLine("Email ID: " + emailIDTextBox.Text);
+                write.WriteLine("Investor name: " + investorNameTextBox.Text);
+                write.WriteLine("Postal code" + postCodeTextBox.Text);
+                write.WriteLine("Contact number: " + phoneNumberTextBox.Text);
+                write.WriteLine("Principal loan amount: " + investmentAmountTextBox.Text);
+                write.WriteLine("Monthly EMI: {0}", emiSwitch);
+                write.WriteLine("Tenure of loan: "+ yearSwitch*12);
+                write.WriteLine("Total repayment: {0}", totalRepaymentsSwitch);
+                write.WriteLine("Rate of interest: " + rate);
             }
 
 
@@ -314,24 +313,75 @@ namespace mad4Road
          
         private void searchTransactionButton_Click(object sender, EventArgs e)
         {
-            try
+            if (transactionNoSearchRadioButton.Checked==true)
             {
-                string transactionNo;
-                StreamReader InputFile;
-                InputFile = File.OpenText(filepath);
-                searchTransactionListBox.Items.Clear();
-                while (!InputFile.EndOfStream)
-                {
-                    transactionNo = InputFile.ReadLine();
+                StreamReader tranID = new StreamReader(filepath);
+                string ID = searchTransactionInputTextBox.Text;
 
-                    searchTransactionListBox.Items.Add(transactionNo);
+                using (tranID)
+                {
+                    string currentlines;
+                    currentlines=tranID.ReadLine();
+                    while (currentlines!=null)
+                    {
+                        if (currentlines.Equals("Transaction number: " + ID))
+                        {
+                            for (int i = 0; i < 9; i++)
+                            {
+                                searchTransactionListBox.Items.Add(tranID.ReadLine());
+                            }
+
+                            break;
+
+                        }
+                        else
+                        {
+                            currentlines=tranID.ReadLine();
+                        }
+                    }
                 }
-                InputFile.Close();
+
             }
-            catch
+            else if (emailSearchRadioButton.Checked==true)
             {
-                MessageBox.Show("wrong");
+
             }
+
+            else
+            {
+                MessageBox.Show("select one");
+            }
+
+            
+
+
+            //try
+            //{
+            //    string transactionNo = searchTransactionInputTextBox.Text;
+            //    StreamReader InputFile;
+            //    string information = System.IO.File.ReadAllText(filepath);
+            //    searchTransactionListBox.Items.Clear();
+
+            //    var pattern = @"Transaction number: " + transactionNo + "(.|\n)*" + @"\s*(Transaction number: |.)";
+            //    var match = Regex.Match(information, pattern);
+
+            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[0]);
+            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[1]);
+            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[2]);
+            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[3]);
+            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[4]);
+            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[5]);
+            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[6]);
+            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[7]);
+            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[8]);
+            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[9]);
+
+            //    //InputFile.Close();
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("wrong");
+            //}
 
             
 
@@ -339,8 +389,11 @@ namespace mad4Road
         private void clearTransactionButton_Click(object sender, EventArgs e)
         {
            
-                searchTransactionListBox.Items.Clear();
+            searchTransactionListBox.Items.Clear();
             searchTransactionInputTextBox.Clear();
+            transactionNoSearchRadioButton.Checked=false;
+            emailSearchRadioButton.Checked=false;
+
         }
     }
 
