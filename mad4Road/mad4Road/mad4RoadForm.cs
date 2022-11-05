@@ -357,12 +357,12 @@ namespace mad4Road
                     {
                         if (currentlines.Equals("Email ID: " + searchemailId))
                         {
-                            for (int i = 1; i < 8; i++)
+                            for (int i = 1; i < 9; i++)
                             {
                                 searchTransactionListBox.Items.Add(tranID.ReadLine());
                             }
+                            break;
 
-                            
 
                         }
                         else
