@@ -313,10 +313,14 @@ namespace mad4Road
          
         private void searchTransactionButton_Click(object sender, EventArgs e)
         {
+            StreamReader tranID = new StreamReader(filepath);
+            
+
+
             if (transactionNoSearchRadioButton.Checked==true)
             {
-                StreamReader tranID = new StreamReader(filepath);
-                string ID = searchTransactionInputTextBox.Text;
+                string searchtranId = searchTransactionInputTextBox.Text;
+
 
                 using (tranID)
                 {
@@ -324,7 +328,7 @@ namespace mad4Road
                     currentlines=tranID.ReadLine();
                     while (currentlines!=null)
                     {
-                        if (currentlines.Equals("Transaction number: " + ID))
+                        if (currentlines.Equals("Transaction number: " + searchtranId))
                         {
                             for (int i = 0; i < 9; i++)
                             {
@@ -344,6 +348,29 @@ namespace mad4Road
             }
             else if (emailSearchRadioButton.Checked==true)
             {
+                string searchemailId = searchTransactionInputTextBox.Text;
+                using (tranID)
+                {
+                    string currentlines;
+                    currentlines=tranID.ReadLine();
+                    while (currentlines!=null)
+                    {
+                        if (currentlines.Equals("Email ID: " + searchemailId))
+                        {
+                            for (int i = 1; i < 8; i++)
+                            {
+                                searchTransactionListBox.Items.Add(tranID.ReadLine());
+                            }
+
+                            
+
+                        }
+                        else
+                        {
+                            currentlines=tranID.ReadLine();
+                        }
+                    }
+                }
 
             }
 

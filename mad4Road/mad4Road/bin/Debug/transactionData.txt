@@ -38,3 +38,13 @@ Monthly EMI: 68533.554606495420811400215508
 Tenure of loan: 12
 Total repayment: 1608159.6552779450497368025861
 Rate of interest: 8.5%
+Transaction number: 67227
+Email ID: PP@gmail.com
+Investor name: pp
+Postal codefdsf
+Contact number: fdsf
+Principal loan amount: 423242
+Monthly EMI: 36915.075167974749057353163908
+Tenure of loan: 12
+Total repayment: 866222.9020156969886882379669
+Rate of interest: 8.5%
