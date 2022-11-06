@@ -377,9 +377,18 @@ namespace mad4Road
         }
         private void submitButton_Click(object sender, EventArgs e)
         {
-             
-            bool n = invalid_name(investorNameTextBox.Text);
-            bool em = invalid_emailid(emailIDTextBox.Text);
+             if (investorNameTextBox.Text=="")
+            {
+                MessageBox.Show("Please enter the valid Details.");
+            }
+            else
+            {
+                
+
+            }
+            //bool n = invalid_name(investorNameTextBox.Text);
+            //bool em = invalid_emailid(emailIDTextBox.Text);
+
 
 
             StreamWriter write = File.AppendText(filepath);
@@ -400,7 +409,6 @@ namespace mad4Road
 
 
             searchTransactionGroupBox.Enabled=true;
-
 
         }
 
@@ -444,27 +452,68 @@ namespace mad4Road
             else if (emailSearchRadioButton.Checked==true)
             {
                 string searchemailId = searchTransactionInputTextBox.Text;
+
+
+                //var pattern = @"Transaction number:\s*\d+\s*\nEmail ID: " + searchemailId + "(.|\n)*";
+                //string information = System.IO.File.ReadAllText(filepath);
+                //MatchCollection matches = Regex.Matches(information, pattern);
+
+                //foreach (Match match in matches)
+                //{
+                //    //Console.WriteLine(match.Groups[1].Value);
+                //    var stringList = match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None);
+                //    foreach ()
+                //    if (match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None))
+                //    {
+                //        searchTransactionListBox.Items.Add("Transaction" + match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[0]);
+                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[1]);
+                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[2]);
+                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[3]);
+                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[4]);
+                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[5]);
+                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[6]);
+                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[7]);
+                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[8]);
+                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[9]);
+                //    }
+
+                //}
+
                 using (tranID)
                 {
                     string currentlines;
-                    currentlines=tranID.ReadLine();
-                    while (currentlines!=null)
+                    currentlines = tranID.ReadLine();
+                    string previousLine1 = "";
+
+                    while(currentlines != null)
                     {
-                        if (currentlines.Equals("Email ID: " + searchemailId))
+                        string comparisonString = "Email ID: " + searchemailId;
+                        if (currentlines.Equals(comparisonString))
                         {
-                            for (int i = 3; i < 9; i++)
+
+                            searchTransactionListBox.Items.Add(comparisonString);
+                            for (int i = 0; i < 7; i++)
                             {
                                 searchTransactionListBox.Items.Add(tranID.ReadLine());
                             }
                             break;
-
-
                         }
                         else
                         {
                             currentlines=tranID.ReadLine();
                         }
                     }
+                    
+
+                    //if (currentlines.Contains(searchemailId))
+                    //{
+                    //    searchTransactionListBox.Items.Add("Email ID: " + searchemailId);
+                    //    //for (int i = 0; i < 7; i++)
+                    //    //{
+                    //    //    searchTransactionListBox.Items.Add(tranID.ReadLine());
+                    //    //}
+                    //}
+         
                 }
 
             }
