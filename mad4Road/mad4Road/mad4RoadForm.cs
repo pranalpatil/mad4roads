@@ -21,15 +21,20 @@ namespace mad4Road
 {
     public partial class mad4RoadForm : Form
     {
-
-        public const string PASSWORD = "";//2Fast4U#
+        public class investamoutValidity : Exception
+        {
+            public investamoutValidity(string message) : base(message)
+            {
+            }
+        }
+            public const string PASSWORD = "";//2Fast4U#
         string filepath = @"\\Mac\Home\Desktop\Windows Data\University\Assignment 3\Final File\mad4roads_assign3\mad4Road\mad4Road\bin\Debug\transactionData.txt";
 
 
         public mad4RoadForm()
         {
             InitializeComponent();
-
+            //passwordAttempt = 0;
         }
 
         const int EXPANSION = 100, WIDTHSTART = 580, HEIGHTSTART = 400,
@@ -45,17 +50,35 @@ namespace mad4Road
         string rate;
 
 
-        int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, loginattempt = 0, passwordAttempt = 1, yearSwitch = 0, intrestPerSwitch = 0;
+        int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, loginattempt = 0, passwordAttempt = 0, yearSwitch = 0, investamounts=0;
         string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "", transactionId = "";
         decimal emi1 = 0, emi3 = 0, emi5 = 0, emi7 = 0, YearInMonth1 = 12, YearInMonth3 = 36, YearInMonth5 = 60, YearInMonth7 = 84;
         decimal TOTALINTREST1 = 0.0m, TOTALINTREST3 = 0.0m, TOTALINTREST5 = 0.0m, TOTALINTREST7 = 0.0m, TOTALREPAYMENTS1 = 0.0m, TOTALREPAYMENTS3 = 0.0m,
-                TOTALREPAYMENTS5 = 0.0m, TOTALREPAYMENTS7 = 0.0m;
+                TOTALREPAYMENTS5 = 0.0m, TOTALREPAYMENTS7 = 0.0m, investamount=0.0m;
 
-
+       
         private void loginButton_Click(object sender, EventArgs e)
         {
-            if (passwordInputBox.Text.Equals(PASSWORD))
+            if (passwordInputBox.Text != PASSWORD)
             {
+                passwordAttempt++;
+                if(passwordAttempt < 2)
+                {
+                    MessageBox.Show("You entered wrong password. \n"+passwordAttempt+" out of 2 Attemps");
+                }
+                else
+                {
+                    MessageBox.Show("You entered wrong password. \n "+passwordAttempt+" out of 2 Attemps");
+                    this.Close();
+                    
+                }
+                
+
+            }
+            else
+            {
+
+
                 if (!FormWidthExpanded)
                 {
                     for (int i = WIDTHSTART; i < WIDTHEXPAND; i +=
@@ -81,19 +104,6 @@ namespace mad4Road
                 searchTransactionGroupBox.Enabled=true;
                 summaryGroupBox.Enabled=true;
 
-            }
-            else
-            {
-
-                MessageBox.Show("You entered wrong password. \n "+passwordAttempt+"\n out of 2 Attemps");
-
-                passwordAttempt+=1;
-
-                if (passwordAttempt==3)
-                {
-                    MessageBox.Show("You entered wrong password. \n "+passwordAttempt+"\n out of 2 Attemps");
-                    this.Close();
-                }
 
             }
 
@@ -126,13 +136,45 @@ namespace mad4Road
 
         private void displayButton_Click(object sender, EventArgs e)
         {
-            decimal investAmount = Convert.ToDecimal(investmentAmountTextBox.Text);
+            //HoursWorked = decimal.Parse(HoursWorkedTextBox.Text);
+            
 
 
             //double calculateRepayments(int)
             //repayment methd Return
             //create 2 more methd
+            if (string.IsNullOrEmpty(investmentAmountTextBox.Text))
+            {
+                
+                MessageBox.Show("Please enter ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                investmentAmountTextBox.SelectAll();
+                investmentAmountTextBox.Focus();
+                return;
+            }
+            //Validating the attendees for invalid Data input
+            try
+            {
+                investamount = decimal.Parse(investmentAmountTextBox.Text);
+                if (investamount>0)
+                {
+                                   
 
+                }
+                else
+                {
+                    throw new investamoutValidity("Invalid number");
+                }
+            }
+            //Catching the Invalid number of attendees. 
+            catch
+            {
+                MessageBox.Show("Invalid ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                investmentAmountTextBox.SelectAll();
+                investmentAmountTextBox.Focus();
+                return;
+
+            }
+            decimal investAmount = Convert.ToDecimal(investmentAmountTextBox.Text);
 
             if (investAmount < lowerBound)
             {
@@ -284,8 +326,61 @@ namespace mad4Road
 
         }
 
+        public bool invalid_name(string n)
+        {
+            Regex check = new Regex(@"^([a-zA-Z]{3,30}\s*)+[a-zA-Z]{3,30}");
+            bool valid = false;
+            valid =check.IsMatch(n);
+            if (valid)
+            {
+                return valid;
+            }
+            else
+            {
+                MessageBox.Show("Name is not in correct format");
+                return valid;
+            }
+        }
+
+        public bool invalid_postcode (string p)
+        {
+            Regex check = new Regex(@"");
+            bool valid = false;
+            valid =check.IsMatch(p);
+            if (valid)
+            {
+                return valid;
+
+            }
+            else
+            {
+                MessageBox.Show("Post Code is not in correct format");
+                return false;
+            }
+        }
+
+        public bool invalid_emailid(string em)
+        {
+            Regex check = new Regex(@"^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$");
+            bool valid = false;
+            valid =check.IsMatch(em);
+            if (valid==true)
+            {
+                return valid;
+
+            }
+            else
+            {
+                MessageBox.Show("email is not in correct format");
+                return valid;
+            }
+        }
         private void submitButton_Click(object sender, EventArgs e)
         {
+             
+            bool n = invalid_name(investorNameTextBox.Text);
+            bool em = invalid_emailid(emailIDTextBox.Text);
+
 
             StreamWriter write = File.AppendText(filepath);
             using (write)
@@ -309,7 +404,7 @@ namespace mad4Road
 
         }
 
-
+        
          
         private void searchTransactionButton_Click(object sender, EventArgs e)
         {
@@ -357,7 +452,7 @@ namespace mad4Road
                     {
                         if (currentlines.Equals("Email ID: " + searchemailId))
                         {
-                            for (int i = 1; i < 9; i++)
+                            for (int i = 3; i < 9; i++)
                             {
                                 searchTransactionListBox.Items.Add(tranID.ReadLine());
                             }
