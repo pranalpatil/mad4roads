@@ -50,7 +50,7 @@ namespace mad4Road
         int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, passwordAttempt = 0, yearSwitch = 0, totalCounter = 0;
         string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "", lineNum, postCode;
         decimal emi1 = 0, emi3 = 0, emi5 = 0, emi7 = 0, yearInMonth1 = 12, yearInMonth3 = 36, yearInMonth5 = 60, yearInMonth7 = 84;
-        decimal totalInterest = 0.0m, totalInterest3 = 0.0m, TOTALINTREST5 = 0.0m, TOTALINTREST7 = 0.0m, TOTALREPAYMENTS1 = 0.0m, TOTALREPAYMENTS3 = 0.0m,
+        decimal totalInterest = 0.0m, totalInterest3 = 0.0m, totalInterest5 = 0.0m, totalInterest7 = 0.0m, totalRepayments1 = 0.0m, TOTALREPAYMENTS3 = 0.0m,
                 TOTALREPAYMENTS5 = 0.0m, TOTALREPAYMENTS7 = 0.0m, investamount=0.0m,TOTALAMOUNTTAKEN=0m,OVERALLTOTALAMOUNTTAKEN=0m, OverallTotalMonths = 0,TotalMonths = 0, TotalIntrest=0m, OverallTotalIntrest=0m, Averagetotalmonths=0m, Averagetotalamounttaken=0m;
 
        
@@ -116,19 +116,19 @@ namespace mad4Road
             decimal rate = Convert.ToDecimal(roi/12);
             decimal amount = principalAmount;
             int period = tenure*12 ;
-            decimal sum = cons + rate/pct;
+            decimal sum = cons + (rate/pct);
 
             double numValue = Math.Pow(Decimal.ToDouble(sum), period);
             double denomValue = (Math.Pow(Decimal.ToDouble(sum), period) - 1);
 
             decimal emi = amount*(rate/100)*Convert.ToDecimal(numValue)/Convert.ToDecimal(denomValue);
 
-            return emi;
+            return Math.Round(emi,2);
         }
 
         public void displayInterest(int year, decimal interest, decimal emi, decimal totalInterest, decimal totalPayment)
         {
-            repaymentListBOX.Items.Add(year + "Year\t" + interest + "%\t" + emi.ToString("0.00")+ "\t    " + totalInterest.ToString("0.00")+ "\t  " + totalPayment.ToString("0.00"));
+            repaymentListBOX.Items.Add(year + "Year\t" + interest + "%\t" + emi.ToString("C")+"\t"+"\t" + totalInterest.ToString("0.00")+"\t"+ totalPayment.ToString("0.00")+"\t       ");
         }
 
         //public bool IsWithinRange( string name, decimal min, decimal max, decimal number )
@@ -185,23 +185,23 @@ namespace mad4Road
                 emi3 = calculateEMI(YEAR3, INTREST6_5PCT, investAmount);
                 emi5 = calculateEMI(YEAR5, INTREST7PCT, investAmount);
                 emi7 = calculateEMI(YEAR7, INTREST7_5PCT, investAmount);
-                totalInterest=emi1*yearInMonth1;
-                totalInterest3=emi3*yearInMonth3;
-                TOTALINTREST5=emi5*yearInMonth5;
-                TOTALINTREST7=emi7*yearInMonth7;
-                TOTALREPAYMENTS1 = totalInterest+investAmount;
+                totalInterest=emi1*yearInMonth1 - investAmount;
+                totalInterest3=emi3*yearInMonth3 - investAmount;
+                totalInterest5=emi5*yearInMonth5 - investAmount;
+                totalInterest7=emi7*yearInMonth7 - investAmount;
+                totalRepayments1 = totalInterest+investAmount;
                 TOTALREPAYMENTS3 = totalInterest3+investAmount;
-                TOTALREPAYMENTS5 = TOTALINTREST5+investAmount;
-                TOTALREPAYMENTS7 = TOTALINTREST7+investAmount;
+                TOTALREPAYMENTS5 = totalInterest5+investAmount;
+                TOTALREPAYMENTS7 = totalInterest7+investAmount;
 
-                displayInterest(YEAR1, INTREST6PCT, emi1, totalInterest, TOTALREPAYMENTS1);
+                displayInterest(YEAR1, INTREST6PCT, emi1, totalInterest, totalRepayments1);
                 displayInterest(YEAR3, INTREST6_5PCT, emi3, totalInterest3, TOTALREPAYMENTS3);
-                displayInterest(YEAR5, INTREST7PCT, emi5, TOTALINTREST5, TOTALREPAYMENTS5);
-                displayInterest(YEAR7, INTREST7_5PCT, emi7, TOTALINTREST7, TOTALREPAYMENTS7);
-                //repaymentListBOX.Items.Add(YEAR1 + "Year\t" + INTREST6PCT + "%\t" + emi1.ToString("0.00")+ "\t" + totalInterest.ToString("0.00")+ "\t" + TOTALREPAYMENTS1.ToString("0.00"));
+                displayInterest(YEAR5, INTREST7PCT, emi5, totalInterest5, TOTALREPAYMENTS5);
+                displayInterest(YEAR7, INTREST7_5PCT, emi7, totalInterest7, TOTALREPAYMENTS7);
+                //repaymentListBOX.Items.Add(YEAR1 + "Year\t" + INTREST6PCT + "%\t" + emi1.ToString("0.00")+ "\t" + totalInterest.ToString("0.00")+ "\t" + totalRepayments1.ToString("0.00"));
                 //repaymentListBOX.Items.Add(YEAR3 + "Year\t" + INTREST6_5PCT + "%\t" + emi3.ToString("0.00")+ "\t" + totalInterest3.ToString("0.00")+ "\t" + TOTALREPAYMENTS3.ToString("0.00"));
-                //repaymentListBOX.Items.Add(YEAR5 + "Year\t" + INTREST7PCT + "%\t" + emi5.ToString("0.00")+ "\t" + TOTALINTREST5.ToString("0.00")+ "\t" + TOTALREPAYMENTS5.ToString("0.00"));
-                //repaymentListBOX.Items.Add(YEAR7 + "Year\t" + INTREST7_5PCT + "%\t" + emi7.ToString("0.00")+ "\t" + TOTALINTREST7.ToString("0.00")+ "\t" + TOTALREPAYMENTS7.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR5 + "Year\t" + INTREST7PCT + "%\t" + emi5.ToString("0.00")+ "\t" + totalInterest5.ToString("0.00")+ "\t" + TOTALREPAYMENTS5.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR7 + "Year\t" + INTREST7_5PCT + "%\t" + emi7.ToString("0.00")+ "\t" + totalInterest7.ToString("0.00")+ "\t" + TOTALREPAYMENTS7.ToString("0.00"));
             }
             else if (investAmount >= lowerBound && investAmount < uperBound)
             {
@@ -209,24 +209,24 @@ namespace mad4Road
                 emi3 = calculateEMI(YEAR3, INTREST8_5PCT, investAmount);
                 emi5 = calculateEMI(YEAR5, INTREST9PCT, investAmount);
                 emi7 = calculateEMI(YEAR7, INTREST9_5PCT, investAmount);
-                totalInterest=emi1*yearInMonth1;
-                totalInterest3=emi3*yearInMonth3;
-                TOTALINTREST5=emi5*yearInMonth5;
-                TOTALINTREST7=emi7*yearInMonth7;
-                TOTALREPAYMENTS1 = totalInterest+investAmount;
+                totalInterest=emi1*yearInMonth1 - investAmount;
+                totalInterest3=emi3*yearInMonth3 - investAmount;
+                totalInterest5=emi5*yearInMonth5 - investAmount;
+                totalInterest7=emi7*yearInMonth7 - -investAmount;
+                totalRepayments1 = totalInterest+investAmount;
                 TOTALREPAYMENTS3 = totalInterest3+investAmount;
-                TOTALREPAYMENTS5 = TOTALINTREST5+investAmount;
-                TOTALREPAYMENTS7 = TOTALINTREST7+investAmount;
+                TOTALREPAYMENTS5 = totalInterest5+investAmount;
+                TOTALREPAYMENTS7 = totalInterest7+investAmount;
 
-                displayInterest(YEAR1, INTREST8PCT, emi1, totalInterest, TOTALREPAYMENTS1);
+                displayInterest(YEAR1, INTREST8PCT, emi1, totalInterest, totalRepayments1);
                 displayInterest(YEAR3, INTREST8_5PCT, emi3, totalInterest3, TOTALREPAYMENTS3);
-                displayInterest(YEAR5, INTREST9PCT, emi5, TOTALINTREST5, TOTALREPAYMENTS5);
-                displayInterest(YEAR7, INTREST9_5PCT, emi7, TOTALINTREST7, TOTALREPAYMENTS7);
+                displayInterest(YEAR5, INTREST9PCT, emi5, totalInterest5, TOTALREPAYMENTS5);
+                displayInterest(YEAR7, INTREST9_5PCT, emi7, totalInterest7, TOTALREPAYMENTS7);
 
-                //repaymentListBOX.Items.Add(YEAR1 + "Year\t" + INTREST8PCT + "%\t" + emi1.ToString("0.00")+ "\t" + totalInterest.ToString("0.00")+ "\t" + TOTALREPAYMENTS1.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR1 + "Year\t" + INTREST8PCT + "%\t" + emi1.ToString("0.00")+ "\t" + totalInterest.ToString("0.00")+ "\t" + totalRepayments1.ToString("0.00"));
                 //repaymentListBOX.Items.Add(YEAR3 + "Year\t" + INTREST8_5PCT + "%\t" + emi3.ToString("0.00")+ "\t" + totalInterest3.ToString("0.00")+ "\t" + TOTALREPAYMENTS3.ToString("0.00"));
-                //repaymentListBOX.Items.Add(YEAR5 + "Year\t" + INTREST9PCT + "%\t" + emi5.ToString("0.00")+ "\t" + TOTALINTREST5.ToString("0.00")+ "\t" + TOTALREPAYMENTS5.ToString("0.00"));
-                //repaymentListBOX.Items.Add(YEAR7 + "Year\t" + INTREST9_5PCT + "%\t" + emi7.ToString("0.00")+ "\t" + TOTALINTREST7.ToString("0.00")+ "\t" + TOTALREPAYMENTS7.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR5 + "Year\t" + INTREST9PCT + "%\t" + emi5.ToString("0.00")+ "\t" + totalInterest5.ToString("0.00")+ "\t" + TOTALREPAYMENTS5.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR7 + "Year\t" + INTREST9_5PCT + "%\t" + emi7.ToString("0.00")+ "\t" + totalInterest7.ToString("0.00")+ "\t" + TOTALREPAYMENTS7.ToString("0.00"));
             }
             else
             {
@@ -234,24 +234,24 @@ namespace mad4Road
                 emi3 = calculateEMI(YEAR3, INTREST8_75PCT, investAmount);
                 emi5 = calculateEMI(YEAR5, INTREST9_1PCT, investAmount);
                 emi7 = calculateEMI(YEAR7, INTREST9_25PCT, investAmount);
-                totalInterest=emi1*yearInMonth1;
-                totalInterest3=emi3*yearInMonth3;
-                TOTALINTREST5=emi5*yearInMonth5;
-                TOTALINTREST7=emi7*yearInMonth7;
-                TOTALREPAYMENTS1 = totalInterest+investAmount;
+                totalInterest=emi1*yearInMonth1 - investAmount;
+                totalInterest3=emi3*yearInMonth3 - investAmount;
+                totalInterest5=emi5*yearInMonth5 - investAmount;
+                totalInterest7=emi7*yearInMonth7 - -investAmount;
+                totalRepayments1 = totalInterest+investAmount;
                 TOTALREPAYMENTS3 = totalInterest3+investAmount;
-                TOTALREPAYMENTS5 = TOTALINTREST5+investAmount;
-                TOTALREPAYMENTS7 = TOTALINTREST7+investAmount;
+                TOTALREPAYMENTS5 = totalInterest5+investAmount;
+                TOTALREPAYMENTS7 = totalInterest7+investAmount;
 
-                displayInterest(YEAR1, INTREST8_5PCT, emi1, totalInterest, TOTALREPAYMENTS1);
+                displayInterest(YEAR1, INTREST8_5PCT, emi1, totalInterest, totalRepayments1);
                 displayInterest(YEAR3, INTREST8_75PCT, emi3, totalInterest3, TOTALREPAYMENTS3);
-                displayInterest(YEAR5, INTREST9_1PCT, emi5, TOTALINTREST5, TOTALREPAYMENTS5);
-                displayInterest(YEAR7, INTREST9_25PCT, emi7, TOTALINTREST7, TOTALREPAYMENTS7);
+                displayInterest(YEAR5, INTREST9_1PCT, emi5, totalInterest5, TOTALREPAYMENTS5);
+                displayInterest(YEAR7, INTREST9_25PCT, emi7, totalInterest7, TOTALREPAYMENTS7);
 
-                //repaymentListBOX.Items.Add(YEAR1 + "Year\t" + INTREST8_5PCT + "%\t" + emi1.ToString("0.00")+ "\t" + totalInterest.ToString("0.00")+ "\t" + TOTALREPAYMENTS1.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR1 + "Year\t" + INTREST8_5PCT + "%\t" + emi1.ToString("0.00")+ "\t" + totalInterest.ToString("0.00")+ "\t" + totalRepayments1.ToString("0.00"));
                 //repaymentListBOX.Items.Add(YEAR3 + "Year\t" + INTREST8_75PCT + "%\t" + emi3.ToString("0.00")+ "\t" + totalInterest3.ToString("0.00")+ "\t" + TOTALREPAYMENTS3.ToString("0.00"));
-                //repaymentListBOX.Items.Add(YEAR5 + "Year\t" + INTREST9_1PCT + "%\t" + emi5.ToString("0.00")+ "\t" + TOTALINTREST5.ToString("0.00")+ "\t" + TOTALREPAYMENTS5.ToString("0.00"));
-                //repaymentListBOX.Items.Add(YEAR7 + "Year\t" + INTREST9_25PCT + "%\t" + emi7.ToString("0.00")+ "\t" + TOTALINTREST7.ToString("0.00")+ "\t" + TOTALREPAYMENTS7.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR5 + "Year\t" + INTREST9_1PCT + "%\t" + emi5.ToString("0.00")+ "\t" + totalInterest5.ToString("0.00")+ "\t" + TOTALREPAYMENTS5.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR7 + "Year\t" + INTREST9_25PCT + "%\t" + emi7.ToString("0.00")+ "\t" + totalInterest7.ToString("0.00")+ "\t" + TOTALREPAYMENTS7.ToString("0.00"));
 
 
             }
@@ -305,16 +305,16 @@ namespace mad4Road
                 switch (selectTermIndex)
                 {
                     case 0:
-                        yearSwitch=YEAR1; emiSwitch=emi1.ToString(); totalInterestSwitch=totalInterest.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS1.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
+                        yearSwitch=YEAR1; emiSwitch=emi1.ToString(); totalInterestSwitch=totalInterest.ToString(); totalRepaymentsSwitch=totalRepayments1.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
                         break;
                     case 1:
                         yearSwitch=YEAR3; emiSwitch=emi3.ToString(); totalInterestSwitch=totalInterest3.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS3.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
                         break;
                     case 2:
-                        yearSwitch=YEAR5; emiSwitch=emi5.ToString(); totalInterestSwitch=TOTALINTREST5.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS5.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
+                        yearSwitch=YEAR5; emiSwitch=emi5.ToString(); totalInterestSwitch=totalInterest5.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS5.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
                         break;
                     case 4:
-                        yearSwitch=YEAR7; emiSwitch=emi7.ToString(); totalInterestSwitch=TOTALINTREST7.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS7.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
+                        yearSwitch=YEAR7; emiSwitch=emi7.ToString(); totalInterestSwitch=totalInterest7.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS7.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
                         break;
 
                 }
@@ -338,93 +338,136 @@ namespace mad4Road
 
         }
 
-        public bool invalid_name(string n)
-        {
-            Regex check = new Regex(@"^([a-zA-Z]{3,30}\s*)+[a-zA-Z]{3,30}");
-            bool valid = false;
-            valid =check.IsMatch(n);
-            if (valid)
-            {
-                return valid;
-            }
-            else
-            {
-                MessageBox.Show("Name is not in correct format");
-                return valid;
-            }
-        }
+        //public bool invalid_name(string n)
+        //{
+        //    Regex check = new Regex(@"^([a-zA-Z]{3,30}\s*)+[a-zA-Z]{3,30}");
+        //    bool valid = false;
+        //    valid =check.IsMatch(n);
+        //    if (valid)
+        //    {
+        //        return valid;
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Name is not in correct format");
+        //        return valid;
+        //    }
+        //}
 
-        public bool invalid_postcode (string p)
-        {
-            Regex check = new Regex(@"");
-            bool valid = false;
-            valid =check.IsMatch(p);
-            if (valid)
-            {
-                return valid;
+        //public bool invalid_postcode (string p)
+        //{
+        //    Regex check = new Regex(@"");
+        //    bool valid = false;
+        //    valid =check.IsMatch(p);
+        //    if (valid)
+        //    {
+        //        return valid;
 
-            }
-            else
-            {
-                MessageBox.Show("Post Code is not in correct format");
-                return false;
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Post Code is not in correct format");
+        //        return false;
+        //    }
+        //}
 
        
-        public bool invalid_emailid(string emailaddress)
-        {
+        //public bool invalid_emailid(string emailaddress)
+        //{
             
-            try
-            {
-                MailAddress m = new MailAddress(emailaddress);
+        //    try
+        //    {
+        //        MailAddress m = new MailAddress(emailaddress);
 
-                return true;
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("email is not in correct format");
-                return false;
-            }
+        //        return true;
+        //    }
+        //    catch (FormatException)
+        //    {
+        //        MessageBox.Show("email is not in correct format");
+        //        return false;
+        //    }
+        //}
+
+        private static Regex invalid_emailid()
+        {
+            string regexPattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
+                + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"
+                + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+
+            return new Regex(regexPattern, RegexOptions.IgnoreCase);
         }
+
+        static Regex validateID = invalid_emailid();
+
         private void submitButton_Click(object sender, EventArgs e)
         {
-            Name=investorNameTextBox.Text;
+            
+            Name =investorNameTextBox.Text;
             postCode=postCodeTextBox.Text;
-            if (investorNameTextBox.Text == "")
-            {
-                // first name was incorrect
-                MessageBox.Show("Please enter Name", "Message", MessageBoxButtons.OK);
-                investorNameTextBox.Focus();
-                return;
+
+            if (String.IsNullOrEmpty(investorNameTextBox.Text)) 
+            { 
+                MessageBox.Show("Invalid Customer Name!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
+                return; 
             }
-            if (postCodeTextBox.Text == "")
+            Regex validationPC = new Regex(@"(?=^.{7}$)"); 
+            
+            if (validationPC.IsMatch(postCodeTextBox.Text) != true)
             {
-                // first name was incorrect
-                MessageBox.Show("Please enter Post Code", "Message", MessageBoxButtons.OK);
-                investorNameTextBox.Focus();
-                return;
-            }
-            if (phoneNumberTextBox.Text == "")
-            {
-                // first name was incorrect
-                MessageBox.Show("Please enter Phone Number", "Message", MessageBoxButtons.OK);
-                investorNameTextBox.Focus();
+
+                MessageBox.Show("Invalid Post Code!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
                 return;
             }
 
-            if (emailIDTextBox.Text == "")
+            Regex phoneValidation = new Regex(@"(?=\d{10}$)");
+            if (phoneValidation.IsMatch(phoneNumberTextBox.Text) != true)
             {
-                // first name was incorrect
-                MessageBox.Show("Please enter Email ID", "Message", MessageBoxButtons.OK);
-                investorNameTextBox.Focus();
-                return;
+                MessageBox.Show("Invalid Phone Number!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); phoneNumberTextBox.Focus(); return;
 
             }
-            else
+           
+            if (validateID.IsMatch(emailIDTextBox.Text) != true) 
             {
-                bool emailaddress = invalid_emailid(emailIDTextBox.Text);
+                MessageBox.Show("Invalid Email ID!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+               
+                return; 
             }
+
+
+            //if (investorNameTextBox.Text == "")
+            //{
+            //    // first name was incorrect
+            //    MessageBox.Show("Please enter Name", "Message", MessageBoxButtons.OK);
+            //    investorNameTextBox.Focus();
+            //    return;
+            //}
+            //if (postCodeTextBox.Text == "")
+            //{
+            //    // first name was incorrect
+            //    MessageBox.Show("Please enter Post Code", "Message", MessageBoxButtons.OK);
+            //    investorNameTextBox.Focus();
+            //    return;
+            //}
+            //if (phoneNumberTextBox.Text == "")
+            //{
+            //    // first name was incorrect
+            //    MessageBox.Show("Please enter Phone Number", "Message", MessageBoxButtons.OK);
+            //    investorNameTextBox.Focus();
+            //    return;
+            //}
+
+            //if (emailIDTextBox.Text == "")
+            //{
+            //    // first name was incorrect
+            //    MessageBox.Show("Please enter Email ID", "Message", MessageBoxButtons.OK);
+            //    investorNameTextBox.Focus();
+            //    return;
+
+            //}
+            //else
+            //{
+            //    bool emailaddress = invalid_emailid(emailIDTextBox.Text);
+            //}
             DialogResult dialogResult = MessageBox.Show("Name: "+Name+"Post Code: "+postCode, "Error", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
@@ -518,35 +561,6 @@ namespace mad4Road
             {
                 string searchemailId = searchTransactionInputTextBox.Text;
 
-                //using (tranID)
-                //{
-                //    string currentlines;
-                //    currentlines = tranID.ReadLine();
-                //    //string previousLine1 = "";
-
-                //    while (currentlines != null)
-                //    {
-                //        string comparisonString =searchemailId;
-                //        if (currentlines.Equals(comparisonString))
-                //        {
-                //           for (int i = 0; i < 7; i++)
-                //           {
-                //                searchTransactionListBox.Items.Add(tranID.ReadLine());
-
-                //                return;
-
-                //           }
-
-
-
-                //        }
-                //        else
-                //        {
-                //            currentlines=tranID.ReadLine();
-                //        }
-
-                //    }
-                //}
                 StreamReader FileRead;
                 try
                 {
@@ -575,12 +589,21 @@ namespace mad4Road
                                     searchTransactionListBox.Items.Add("Rate of interest: " + FileRead.ReadLine());
                                     searchTransactionListBox.Items.Add("\n\n");
                                 }
+                                else
+                                {
+                                    FileRead.ReadLine();
+                                    FileRead.ReadLine();
+                                    FileRead.ReadLine();
+                                    FileRead.ReadLine();
+                                    FileRead.ReadLine();
+                                    FileRead.ReadLine();
+                                    FileRead.ReadLine();
+                                    FileRead.ReadLine();
+                                }
 
                             }
                             
 
-                            FileRead.ReadLine();
-                            FileRead.ReadLine();
 
                         }
                         FileRead.Close();
