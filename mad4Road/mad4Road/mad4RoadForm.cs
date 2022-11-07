@@ -17,6 +17,7 @@ using System.Security.Cryptography;
 using System.IO;
 using System.Xml.Linq;
 using System.Net.Mail;
+using System.Linq.Expressions;
 
 namespace mad4Road
 {
@@ -46,10 +47,10 @@ namespace mad4Road
                         INTREST8_5PCT = 8.5m, INTREST9PCT = 9.0m, INTREST9_5PCT = 9.5m, INTREST8_75PCT = 8.75m, INTREST9_1PCT = 9.1m,
                         INTREST9_25PCT = 9.25m, Months = 12 ;
         string rate;
-        int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, loginattempt = 0, passwordAttempt = 0, yearSwitch = 0, investamounts=0, TotalCounter = 0;
-    string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "", transactionId = "", lineNum, MessageBoxResult, Name, postCode;
+        int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, passwordAttempt = 0, yearSwitch = 0, totalCounter = 0;
+        string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "", lineNum, postCode;
         decimal emi1 = 0, emi3 = 0, emi5 = 0, emi7 = 0, yearInMonth1 = 12, yearInMonth3 = 36, yearInMonth5 = 60, yearInMonth7 = 84;
-        decimal TOTALINTREST1 = 0.0m, TOTALINTREST3 = 0.0m, TOTALINTREST5 = 0.0m, TOTALINTREST7 = 0.0m, TOTALREPAYMENTS1 = 0.0m, TOTALREPAYMENTS3 = 0.0m,
+        decimal totalInterest = 0.0m, totalInterest3 = 0.0m, TOTALINTREST5 = 0.0m, TOTALINTREST7 = 0.0m, TOTALREPAYMENTS1 = 0.0m, TOTALREPAYMENTS3 = 0.0m,
                 TOTALREPAYMENTS5 = 0.0m, TOTALREPAYMENTS7 = 0.0m, investamount=0.0m,TOTALAMOUNTTAKEN=0m,OVERALLTOTALAMOUNTTAKEN=0m, OverallTotalMonths = 0,TotalMonths = 0, TotalIntrest=0m, OverallTotalIntrest=0m, Averagetotalmonths=0m, Averagetotalamounttaken=0m;
 
        
@@ -184,21 +185,21 @@ namespace mad4Road
                 emi3 = calculateEMI(YEAR3, INTREST6_5PCT, investAmount);
                 emi5 = calculateEMI(YEAR5, INTREST7PCT, investAmount);
                 emi7 = calculateEMI(YEAR7, INTREST7_5PCT, investAmount);
-                TOTALINTREST1=emi1*yearInMonth1;
-                TOTALINTREST3=emi3*yearInMonth3;
+                totalInterest=emi1*yearInMonth1;
+                totalInterest3=emi3*yearInMonth3;
                 TOTALINTREST5=emi5*yearInMonth5;
                 TOTALINTREST7=emi7*yearInMonth7;
-                TOTALREPAYMENTS1 = TOTALINTREST1+investAmount;
-                TOTALREPAYMENTS3 = TOTALINTREST3+investAmount;
+                TOTALREPAYMENTS1 = totalInterest+investAmount;
+                TOTALREPAYMENTS3 = totalInterest3+investAmount;
                 TOTALREPAYMENTS5 = TOTALINTREST5+investAmount;
                 TOTALREPAYMENTS7 = TOTALINTREST7+investAmount;
 
-                displayInterest(YEAR1, INTREST6PCT, emi1, TOTALINTREST1, TOTALREPAYMENTS1);
-                displayInterest(YEAR3, INTREST6_5PCT, emi3, TOTALINTREST3, TOTALREPAYMENTS3);
+                displayInterest(YEAR1, INTREST6PCT, emi1, totalInterest, TOTALREPAYMENTS1);
+                displayInterest(YEAR3, INTREST6_5PCT, emi3, totalInterest3, TOTALREPAYMENTS3);
                 displayInterest(YEAR5, INTREST7PCT, emi5, TOTALINTREST5, TOTALREPAYMENTS5);
                 displayInterest(YEAR7, INTREST7_5PCT, emi7, TOTALINTREST7, TOTALREPAYMENTS7);
-                //repaymentListBOX.Items.Add(YEAR1 + "Year\t" + INTREST6PCT + "%\t" + emi1.ToString("0.00")+ "\t" + TOTALINTREST1.ToString("0.00")+ "\t" + TOTALREPAYMENTS1.ToString("0.00"));
-                //repaymentListBOX.Items.Add(YEAR3 + "Year\t" + INTREST6_5PCT + "%\t" + emi3.ToString("0.00")+ "\t" + TOTALINTREST3.ToString("0.00")+ "\t" + TOTALREPAYMENTS3.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR1 + "Year\t" + INTREST6PCT + "%\t" + emi1.ToString("0.00")+ "\t" + totalInterest.ToString("0.00")+ "\t" + TOTALREPAYMENTS1.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR3 + "Year\t" + INTREST6_5PCT + "%\t" + emi3.ToString("0.00")+ "\t" + totalInterest3.ToString("0.00")+ "\t" + TOTALREPAYMENTS3.ToString("0.00"));
                 //repaymentListBOX.Items.Add(YEAR5 + "Year\t" + INTREST7PCT + "%\t" + emi5.ToString("0.00")+ "\t" + TOTALINTREST5.ToString("0.00")+ "\t" + TOTALREPAYMENTS5.ToString("0.00"));
                 //repaymentListBOX.Items.Add(YEAR7 + "Year\t" + INTREST7_5PCT + "%\t" + emi7.ToString("0.00")+ "\t" + TOTALINTREST7.ToString("0.00")+ "\t" + TOTALREPAYMENTS7.ToString("0.00"));
             }
@@ -208,22 +209,22 @@ namespace mad4Road
                 emi3 = calculateEMI(YEAR3, INTREST8_5PCT, investAmount);
                 emi5 = calculateEMI(YEAR5, INTREST9PCT, investAmount);
                 emi7 = calculateEMI(YEAR7, INTREST9_5PCT, investAmount);
-                TOTALINTREST1=emi1*yearInMonth1;
-                TOTALINTREST3=emi3*yearInMonth3;
+                totalInterest=emi1*yearInMonth1;
+                totalInterest3=emi3*yearInMonth3;
                 TOTALINTREST5=emi5*yearInMonth5;
                 TOTALINTREST7=emi7*yearInMonth7;
-                TOTALREPAYMENTS1 = TOTALINTREST1+investAmount;
-                TOTALREPAYMENTS3 = TOTALINTREST3+investAmount;
+                TOTALREPAYMENTS1 = totalInterest+investAmount;
+                TOTALREPAYMENTS3 = totalInterest3+investAmount;
                 TOTALREPAYMENTS5 = TOTALINTREST5+investAmount;
                 TOTALREPAYMENTS7 = TOTALINTREST7+investAmount;
 
-                displayInterest(YEAR1, INTREST8PCT, emi1, TOTALINTREST1, TOTALREPAYMENTS1);
-                displayInterest(YEAR3, INTREST8_5PCT, emi3, TOTALINTREST3, TOTALREPAYMENTS3);
+                displayInterest(YEAR1, INTREST8PCT, emi1, totalInterest, TOTALREPAYMENTS1);
+                displayInterest(YEAR3, INTREST8_5PCT, emi3, totalInterest3, TOTALREPAYMENTS3);
                 displayInterest(YEAR5, INTREST9PCT, emi5, TOTALINTREST5, TOTALREPAYMENTS5);
                 displayInterest(YEAR7, INTREST9_5PCT, emi7, TOTALINTREST7, TOTALREPAYMENTS7);
 
-                //repaymentListBOX.Items.Add(YEAR1 + "Year\t" + INTREST8PCT + "%\t" + emi1.ToString("0.00")+ "\t" + TOTALINTREST1.ToString("0.00")+ "\t" + TOTALREPAYMENTS1.ToString("0.00"));
-                //repaymentListBOX.Items.Add(YEAR3 + "Year\t" + INTREST8_5PCT + "%\t" + emi3.ToString("0.00")+ "\t" + TOTALINTREST3.ToString("0.00")+ "\t" + TOTALREPAYMENTS3.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR1 + "Year\t" + INTREST8PCT + "%\t" + emi1.ToString("0.00")+ "\t" + totalInterest.ToString("0.00")+ "\t" + TOTALREPAYMENTS1.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR3 + "Year\t" + INTREST8_5PCT + "%\t" + emi3.ToString("0.00")+ "\t" + totalInterest3.ToString("0.00")+ "\t" + TOTALREPAYMENTS3.ToString("0.00"));
                 //repaymentListBOX.Items.Add(YEAR5 + "Year\t" + INTREST9PCT + "%\t" + emi5.ToString("0.00")+ "\t" + TOTALINTREST5.ToString("0.00")+ "\t" + TOTALREPAYMENTS5.ToString("0.00"));
                 //repaymentListBOX.Items.Add(YEAR7 + "Year\t" + INTREST9_5PCT + "%\t" + emi7.ToString("0.00")+ "\t" + TOTALINTREST7.ToString("0.00")+ "\t" + TOTALREPAYMENTS7.ToString("0.00"));
             }
@@ -233,22 +234,22 @@ namespace mad4Road
                 emi3 = calculateEMI(YEAR3, INTREST8_75PCT, investAmount);
                 emi5 = calculateEMI(YEAR5, INTREST9_1PCT, investAmount);
                 emi7 = calculateEMI(YEAR7, INTREST9_25PCT, investAmount);
-                TOTALINTREST1=emi1*yearInMonth1;
-                TOTALINTREST3=emi3*yearInMonth3;
+                totalInterest=emi1*yearInMonth1;
+                totalInterest3=emi3*yearInMonth3;
                 TOTALINTREST5=emi5*yearInMonth5;
                 TOTALINTREST7=emi7*yearInMonth7;
-                TOTALREPAYMENTS1 = TOTALINTREST1+investAmount;
-                TOTALREPAYMENTS3 = TOTALINTREST3+investAmount;
+                TOTALREPAYMENTS1 = totalInterest+investAmount;
+                TOTALREPAYMENTS3 = totalInterest3+investAmount;
                 TOTALREPAYMENTS5 = TOTALINTREST5+investAmount;
                 TOTALREPAYMENTS7 = TOTALINTREST7+investAmount;
 
-                displayInterest(YEAR1, INTREST8_5PCT, emi1, TOTALINTREST1, TOTALREPAYMENTS1);
-                displayInterest(YEAR3, INTREST8_75PCT, emi3, TOTALINTREST3, TOTALREPAYMENTS3);
+                displayInterest(YEAR1, INTREST8_5PCT, emi1, totalInterest, TOTALREPAYMENTS1);
+                displayInterest(YEAR3, INTREST8_75PCT, emi3, totalInterest3, TOTALREPAYMENTS3);
                 displayInterest(YEAR5, INTREST9_1PCT, emi5, TOTALINTREST5, TOTALREPAYMENTS5);
                 displayInterest(YEAR7, INTREST9_25PCT, emi7, TOTALINTREST7, TOTALREPAYMENTS7);
 
-                //repaymentListBOX.Items.Add(YEAR1 + "Year\t" + INTREST8_5PCT + "%\t" + emi1.ToString("0.00")+ "\t" + TOTALINTREST1.ToString("0.00")+ "\t" + TOTALREPAYMENTS1.ToString("0.00"));
-                //repaymentListBOX.Items.Add(YEAR3 + "Year\t" + INTREST8_75PCT + "%\t" + emi3.ToString("0.00")+ "\t" + TOTALINTREST3.ToString("0.00")+ "\t" + TOTALREPAYMENTS3.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR1 + "Year\t" + INTREST8_5PCT + "%\t" + emi1.ToString("0.00")+ "\t" + totalInterest.ToString("0.00")+ "\t" + TOTALREPAYMENTS1.ToString("0.00"));
+                //repaymentListBOX.Items.Add(YEAR3 + "Year\t" + INTREST8_75PCT + "%\t" + emi3.ToString("0.00")+ "\t" + totalInterest3.ToString("0.00")+ "\t" + TOTALREPAYMENTS3.ToString("0.00"));
                 //repaymentListBOX.Items.Add(YEAR5 + "Year\t" + INTREST9_1PCT + "%\t" + emi5.ToString("0.00")+ "\t" + TOTALINTREST5.ToString("0.00")+ "\t" + TOTALREPAYMENTS5.ToString("0.00"));
                 //repaymentListBOX.Items.Add(YEAR7 + "Year\t" + INTREST9_25PCT + "%\t" + emi7.ToString("0.00")+ "\t" + TOTALINTREST7.ToString("0.00")+ "\t" + TOTALREPAYMENTS7.ToString("0.00"));
 
@@ -304,10 +305,10 @@ namespace mad4Road
                 switch (selectTermIndex)
                 {
                     case 0:
-                        yearSwitch=YEAR1; emiSwitch=emi1.ToString(); totalInterestSwitch=TOTALINTREST1.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS1.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
+                        yearSwitch=YEAR1; emiSwitch=emi1.ToString(); totalInterestSwitch=totalInterest.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS1.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
                         break;
                     case 1:
-                        yearSwitch=YEAR3; emiSwitch=emi3.ToString(); totalInterestSwitch=TOTALINTREST3.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS3.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
+                        yearSwitch=YEAR3; emiSwitch=emi3.ToString(); totalInterestSwitch=totalInterest3.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS3.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
                         break;
                     case 2:
                         yearSwitch=YEAR5; emiSwitch=emi5.ToString(); totalInterestSwitch=TOTALINTREST5.ToString(); totalRepaymentsSwitch=TOTALREPAYMENTS5.ToString(); rate = repaymentListBOX.SelectedItem.ToString().Split('\t')[1];
@@ -516,38 +517,78 @@ namespace mad4Road
             else if (emailSearchRadioButton.Checked==true)
             {
                 string searchemailId = searchTransactionInputTextBox.Text;
-                
-                using (tranID)
+
+                //using (tranID)
+                //{
+                //    string currentlines;
+                //    currentlines = tranID.ReadLine();
+                //    //string previousLine1 = "";
+
+                //    while (currentlines != null)
+                //    {
+                //        string comparisonString =searchemailId;
+                //        if (currentlines.Equals(comparisonString))
+                //        {
+                //           for (int i = 0; i < 7; i++)
+                //           {
+                //                searchTransactionListBox.Items.Add(tranID.ReadLine());
+
+                //                return;
+
+                //           }
+
+
+
+                //        }
+                //        else
+                //        {
+                //            currentlines=tranID.ReadLine();
+                //        }
+
+                //    }
+                //}
+                StreamReader FileRead;
+                try
                 {
-                    string currentlines;
-                    currentlines = tranID.ReadLine();
-                    //string previousLine1 = "";
-
-                    while (currentlines != null)
+                    using (FileRead= new StreamReader(filepath)) ;
+                    FileRead = File.OpenText(filepath);
                     {
-                        string comparisonString =searchemailId;
-                        if (currentlines.Equals(comparisonString))
+                        while (!FileRead.EndOfStream)
                         {
-                           for (int i = 0; i < 7; i++)
-                           {
-                                searchTransactionListBox.Items.Add(tranID.ReadLine());
-                               
-                                return;
-                                                                        
-                           }
-                                
-                            
-                            
-                        }
-                        else
-                        {
-                            currentlines=tranID.ReadLine();
-                        }
+                            string transID = FileRead.ReadLine();
 
+                            for (int line = 1; line <=1; line++)
+                            {
+                                string checkMail = FileRead.ReadLine();
+
+                                if (checkMail.Contains(searchemailId))
+                                {
+                                    searchTransactionListBox.Items.Add("Transaction number: " + transID);
+                                    searchTransactionListBox.Items.Add("Email ID: " + checkMail);
+                                    searchTransactionListBox.Items.Add("Name: " + FileRead.ReadLine());
+                                    searchTransactionListBox.Items.Add("Postal code: " + FileRead.ReadLine());
+                                    searchTransactionListBox.Items.Add("Contact number: " + FileRead.ReadLine());
+                                    searchTransactionListBox.Items.Add("Borrowed amount: " + FileRead.ReadLine());
+                                    searchTransactionListBox.Items.Add("Monthly EMI: " + FileRead.ReadLine());
+                                    searchTransactionListBox.Items.Add("Tenure: " + FileRead.ReadLine());
+                                    searchTransactionListBox.Items.Add("Total repayment: " + FileRead.ReadLine());
+                                    searchTransactionListBox.Items.Add("Rate of interest: " + FileRead.ReadLine());
+                                    searchTransactionListBox.Items.Add("\n\n");
+                                }
+
+                            }
+                            
+
+                            FileRead.ReadLine();
+                            FileRead.ReadLine();
+
+                        }
+                        FileRead.Close();
                     }
 
-
-
+                }
+                catch
+                {
 
                 }
 
@@ -594,12 +635,12 @@ namespace mad4Road
                         lineNum= FileReader.ReadLine();// 7 line
 
                         lineNum = FileReader.ReadLine();// 8 line
-                        TotalCounter++;
+                        totalCounter++;
 
                         TotalMonths=decimal.Parse(lineNum);
                         OverallTotalMonths+=TotalMonths;
-                        Averagetotalmonths=OverallTotalMonths/TotalCounter;
-                        Averagetotalamounttaken=OVERALLTOTALAMOUNTTAKEN/TotalCounter;
+                        Averagetotalmonths=OverallTotalMonths/totalCounter;
+                        Averagetotalamounttaken=OVERALLTOTALAMOUNTTAKEN/totalCounter;
                         
 
                         lineNum = FileReader.ReadLine(); // 9 line
