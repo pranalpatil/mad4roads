@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* Student Name: Pranal Patil
+ * Student ID: 22222293
+ * Date:07/11/2022
+ * Assignment: 3
+ * Assignment: Create an Application for Term Loan where we
+ */
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,30 +38,21 @@ namespace mad4Road
             }
         }
             public const string PASSWORD = "2Fast4U#";//2Fast4U# 
-        string filepath = @"\\Mac\Home\Desktop\Windows Data\University\Assignment 3\Final File\mad4roads_assign3\mad4Road\mad4Road\bin\Debug\transactionData.txt";
-
-
+        const string filepath = "transactionData.txt";
         public mad4RoadForm()
         {
             InitializeComponent();
             //passwordAttempt = 0;
         }
-
         const int EXPANSION = 100, WIDTHSTART = 580, HEIGHTSTART = 400,
-                    HEIGHTEXPAND = 660, WIDTHEXPAND = 1000;
+                  HEIGHTEXPAND = 660, WIDTHEXPAND = 1000;
         Boolean FormWidthExpanded = false;
         const int YEAR1 = 1, YEAR3 = 3, YEAR5 = 5, YEAR7 = 7;
         const decimal INTREST6PCT = 6.0m, INTREST6_5PCT = 6.5m, INTREST7PCT = 7.0m, INTREST7_5PCT = 7.5m, INTREST8PCT = 8.0m,
-                        INTREST8_5PCT = 8.5m, INTREST9PCT = 9.0m, INTREST9_5PCT = 9.5m, INTREST8_75PCT = 8.75m, INTREST9_1PCT = 9.1m,
-                        INTREST9_25PCT = 9.25m, Months = 12 ;
+                      INTREST8_5PCT = 8.5m, INTREST9PCT = 9.0m, INTREST9_5PCT = 9.5m, INTREST8_75PCT = 8.75m, INTREST9_1PCT = 9.1m,
+                      INTREST9_25PCT = 9.25m, Months = 12 ;
         string rate;
-
-       
-
         int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, passwordAttempt = 0, yearSwitch = 0, totalCounter = 0;
-
-        
-
         string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "", lineNum, postCode, phoneNo, emailId, tId;
         decimal emi1 = 0, emi3 = 0, emi5 = 0, emi7 = 0, yearInMonth1 = 12, yearInMonth3 = 36, yearInMonth5 = 60, yearInMonth7 = 84;
         decimal totalInterest = 0.0m, totalInterest3 = 0.0m, totalInterest5 = 0.0m, totalInterest7 = 0.0m, totalRepayments1 = 0.0m, totalRepayments3 = 0.0m,
@@ -71,17 +70,12 @@ namespace mad4Road
                 }
                 else
                 {
-                    MessageBox.Show("You entered wrong password. \n "+passwordAttempt+" out of 2 Attemps", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.Close();
-                    
+                    MessageBox.Show("You entered wrong password. \n "+passwordAttempt+" out of 2 Attemps"+"\n"+"\n" +"Access Denied", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();  
                 }
-                
-
             }
             else // once Password matched the size of the application will increase.
             {
-
-
                 if (!FormWidthExpanded)
                 {
                     for (int i = WIDTHSTART; i < WIDTHEXPAND; i +=
@@ -91,7 +85,6 @@ namespace mad4Road
                         this.Update();
                         System.Threading.Thread.Sleep(1);
                     }
-                    
                 }
                 // enableing below once password matched
                 passwordInputBox.Visible = false;
@@ -106,14 +99,9 @@ namespace mad4Road
                 investorDetailsGroupBox.Enabled=false;
                 searchTransactionGroupBox.Enabled=true;
                 summaryGroupBox.Enabled=true;
-
-
+                Notelabel.Visible=true;
+                exitButton.Visible=true;
             }
-
-
-
-
-
         }
         // created method for calculating the EMI formula
         decimal calculateEMI(int tenure, decimal roi, decimal principalAmount)
@@ -124,12 +112,9 @@ namespace mad4Road
             decimal amount = principalAmount;
             int period = tenure*12 ;
             decimal sum = cons + (rate/pct);
-
             double numValue = Math.Pow(Decimal.ToDouble(sum), period);
             double denomValue = (Math.Pow(Decimal.ToDouble(sum), period) - 1);
-
             decimal emi = amount*(rate/100)*Convert.ToDecimal(numValue)/Convert.ToDecimal(denomValue);
-
             return Math.Round(emi,2);
         }
 
@@ -142,15 +127,12 @@ namespace mad4Road
         // Display all calculation which calling from calculateEMI methord So user can select the option as per requiremnent.
         private void displayButton_Click(object sender, EventArgs e)
         {
-           
-            
             try
             {
                 investamount = decimal.Parse(investmentAmountTextBox.Text);
                 if (investamount >= 10000 && investamount <= 100000) // defining Limit of Loan amount
                 {
                                    
-
                 }
                 else
                 {
@@ -189,8 +171,6 @@ namespace mad4Road
                 displayInterest(YEAR3, INTREST6_5PCT, emi3, totalInterest3, totalRepayments3);
                 displayInterest(YEAR5, INTREST7PCT, emi5, totalInterest5, totalRepayments5);
                 displayInterest(YEAR7, INTREST7_5PCT, emi7, totalInterest7, totalRepayments7);
-      
-            
             }
             else if (investAmount >= lowerBound && investAmount < uperBound)
             {
@@ -239,10 +219,6 @@ namespace mad4Road
             
             displayButton.Enabled=false;
             investmentAmountTextBox.Enabled=false;
-
-
-
-
         }
         // Clearing the Investment Section so user can again calculate
         private void clearButton_Click(object sender, EventArgs e)
@@ -276,9 +252,6 @@ namespace mad4Road
         // Proceed Button select the user selection from list box and store to index.Also Generate the Transaction no for Investor details.
         private void proceedButton_Click(object sender, EventArgs e)
         {
-
-
-
             if ((repaymentListBOX.SelectedIndex !=-1))
             {
                 selectTermIndex = repaymentListBOX.SelectedIndex;
@@ -299,21 +272,17 @@ namespace mad4Road
                         break;
 
                 }
+                // perfomaing once repayment box is 
                 investorDetailsGroupBox.Enabled=true;
                 investmentSelectionGroupBox.Enabled=false;
                 transactionNoLabel.Text=getRandomTransactionNo();
-
             }
-
             else
             {
                 MessageBox.Show("Please Select the Loan term", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 repaymentListBOX.Focus();
             }
-
-
         }
-
 
         // Method where email id is validating.
         private static Regex invalid_emailid()
@@ -337,7 +306,6 @@ namespace mad4Road
             emailId=emailIDTextBox.Text;
             tId=transactionNoLabel.Text;
 
-
             // Validation for Investor name.
             if (String.IsNullOrEmpty(investorNameTextBox.Text)) 
             { 
@@ -349,7 +317,6 @@ namespace mad4Road
             // Validation for Investor Post Code.
             if (validationPC.IsMatch(postCodeTextBox.Text) != true)
             {
-
                 MessageBox.Show("Invalid Post Code!"+"\n"+"For eg. H73738H", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
                 return;
             }
@@ -359,14 +326,12 @@ namespace mad4Road
             if (phoneValidation.IsMatch(phoneNumberTextBox.Text) != true)
             {
                 MessageBox.Show("Invalid Phone Number!"+"\n"+"For eg. 738493029", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); phoneNumberTextBox.Focus(); return;
-
             }
            
             // Validation for email and calling method from above. 
             if (validateID.IsMatch(emailIDTextBox.Text) != true) 
             {
                 MessageBox.Show("Invalid Email ID!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-               
                 return; 
             }
 
@@ -401,18 +366,12 @@ namespace mad4Road
                 postCodeTextBox.Text="";
                 phoneNumberTextBox.Text="";
                 emailIDTextBox.Text="";
-
-
-
             }
-
             else if (dialogResult == DialogResult.No)
             {
                 
             }
-               searchTransactionGroupBox.Enabled=true;
-          
-            
+               searchTransactionGroupBox.Enabled=true; 
         }
 
         
@@ -420,14 +379,9 @@ namespace mad4Road
         private void searchTransactionButton_Click(object sender, EventArgs e)
         {
             StreamReader tranID = new StreamReader(filepath);
-            
-
-
             if (transactionNoSearchRadioButton.Checked==true) // if this is checked the transaction will search by ID 
             {
                 string searchtranId = searchTransactionInputTextBox.Text;
-
-
                 using (tranID)
                 {
                     string currentlines;
@@ -436,13 +390,21 @@ namespace mad4Road
                     {
                         if (currentlines.Equals(searchtranId))
                         {
-                            for (int i = 0; i < 9; i++)
+                            for (int i = 0; i < 1; i++)
                             {
-                                searchTransactionListBox.Items.Add(tranID.ReadLine());
+                                searchTransactionListBox.Items.Add("Email ID: " +tranID.ReadLine()); 
+                                searchTransactionListBox.Items.Add("Name: " + tranID.ReadLine());
+                                searchTransactionListBox.Items.Add("Postal code: " + tranID.ReadLine());
+                                searchTransactionListBox.Items.Add("Contact number: " + tranID.ReadLine());
+                                searchTransactionListBox.Items.Add("Borrowed amount: " + tranID.ReadLine());
+                                searchTransactionListBox.Items.Add("Monthly EMI: " + tranID.ReadLine());
+                                searchTransactionListBox.Items.Add("Tenure: " + tranID.ReadLine());
+                                searchTransactionListBox.Items.Add("Total repayment: " + tranID.ReadLine());
+                                searchTransactionListBox.Items.Add("Rate of interest: " +tranID.ReadLine());
+                                searchTransactionListBox.Items.Add("\n\n");
+
                             }
-
                             break;
-
                         }
                         else
                         {
@@ -516,22 +478,14 @@ namespace mad4Road
             {
                 MessageBox.Show("select one");
             }
-
-
-            
-
-
         }
         //Clear the transaction group box if next transaction should need to be search.
         private void clearTransactionButton_Click(object sender, EventArgs e)
-        {
-           
+        { 
             searchTransactionListBox.Items.Clear();
             searchTransactionInputTextBox.Clear();
             transactionNoSearchRadioButton.Checked=false;
             emailSearchRadioButton.Checked=false;
-
-      
         }
         // Showing all the Summary of the compnay.
         private void summaryButton_Click(object sender, EventArgs e)
@@ -548,13 +502,13 @@ namespace mad4Road
                         {
                             FileReader.ReadLine();
                         }
-                        lineNum = FileReader.ReadLine(); 
+                        lineNum = FileReader.ReadLine(); // reading 6 Line
                         totalAmountTaken=decimal.Parse(lineNum);
                         overallTotalAmountTaken+=totalAmountTaken;
                        
-                        lineNum= FileReader.ReadLine();
+                        lineNum= FileReader.ReadLine(); // reading 7 Line
 
-                        lineNum = FileReader.ReadLine();
+                        lineNum = FileReader.ReadLine(); // reading 8 Line
                         totalCounter++;
 
                         totalMonths=decimal.Parse(lineNum);
@@ -563,13 +517,11 @@ namespace mad4Road
                         averageTotalAmountTaken=overallTotalAmountTaken/totalCounter;
                         
 
-                        lineNum = FileReader.ReadLine(); 
+                        lineNum = FileReader.ReadLine();  // reading 9 Line
                         totalInterest1=decimal.Parse(lineNum);
                         overallTotalInterest1+=totalInterest1;
-                        
-
-
-                        lineNum = FileReader.ReadLine();
+ 
+                        lineNum = FileReader.ReadLine(); // reading 10 Line
 
                     }
                     // priting the data into Summary list box. 

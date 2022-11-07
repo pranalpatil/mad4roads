@@ -72,6 +72,7 @@
             this.buttonLogoPictureBox = new System.Windows.Forms.PictureBox();
             this.exitButton = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.Notelabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.investmentSelectionGroupBox.SuspendLayout();
             this.investorDetailsGroupBox.SuspendLayout();
@@ -84,7 +85,7 @@
             // 
             this.logoPictureBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.logoPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("logoPictureBox.Image")));
-            this.logoPictureBox.Location = new System.Drawing.Point(567, 51);
+            this.logoPictureBox.Location = new System.Drawing.Point(687, 51);
             this.logoPictureBox.Name = "logoPictureBox";
             this.logoPictureBox.Size = new System.Drawing.Size(741, 212);
             this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -96,7 +97,7 @@
             this.passwordLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordLabel.Location = new System.Drawing.Point(673, 339);
+            this.passwordLabel.Location = new System.Drawing.Point(793, 339);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(220, 31);
             this.passwordLabel.TabIndex = 1;
@@ -105,7 +106,7 @@
             // passwordInputBox
             // 
             this.passwordInputBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.passwordInputBox.Location = new System.Drawing.Point(936, 339);
+            this.passwordInputBox.Location = new System.Drawing.Point(1056, 339);
             this.passwordInputBox.Name = "passwordInputBox";
             this.passwordInputBox.PasswordChar = '*';
             this.passwordInputBox.Size = new System.Drawing.Size(252, 31);
@@ -115,7 +116,7 @@
             // 
             this.loginButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginButton.Location = new System.Drawing.Point(828, 420);
+            this.loginButton.Location = new System.Drawing.Point(948, 420);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(146, 47);
             this.loginButton.TabIndex = 3;
@@ -546,6 +547,7 @@
             // 
             // exitButton
             // 
+            this.exitButton.AutoSize = true;
             this.exitButton.BackColor = System.Drawing.Color.Thistle;
             this.exitButton.Location = new System.Drawing.Point(1465, 1027);
             this.exitButton.Name = "exitButton";
@@ -554,6 +556,7 @@
             this.exitButton.Text = "E&xit";
             this.toolTip.SetToolTip(this.exitButton, "Click here to Exit Application");
             this.exitButton.UseVisualStyleBackColor = false;
+            this.exitButton.Visible = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // toolTip
@@ -562,11 +565,24 @@
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip.ToolTipTitle = "Info";
             // 
+            // Notelabel
+            // 
+            this.Notelabel.AutoSize = true;
+            this.Notelabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Notelabel.Location = new System.Drawing.Point(348, 1155);
+            this.Notelabel.Name = "Notelabel";
+            this.Notelabel.Size = new System.Drawing.Size(1237, 31);
+            this.Notelabel.TabIndex = 10;
+            this.Notelabel.Text = "Loans of over 5 or more years receive free AA road side assistance for the durati" +
+    "on of the loan";
+            this.Notelabel.Visible = false;
+            // 
             // mad4RoadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1905, 1220);
+            this.ClientSize = new System.Drawing.Size(2145, 1128);
+            this.Controls.Add(this.Notelabel);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.buttonLogoPictureBox);
             this.Controls.Add(this.summaryGroupBox);
@@ -638,6 +654,7 @@
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Button summaryClearButton;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Label Notelabel;
     }
 }
 
