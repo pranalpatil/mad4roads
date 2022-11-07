@@ -65,26 +65,26 @@
             this.searchTransactionInputTextBox = new System.Windows.Forms.TextBox();
             this.transactionNoSearchRadioButton = new System.Windows.Forms.RadioButton();
             this.emailSearchRadioButton = new System.Windows.Forms.RadioButton();
-            this.transactionResultsLabel = new System.Windows.Forms.Label();
             this.summaryGroupBox = new System.Windows.Forms.GroupBox();
             this.summaryListBox = new System.Windows.Forms.ListBox();
             this.summaryButton = new System.Windows.Forms.Button();
             this.buttonLogoPictureBox = new System.Windows.Forms.PictureBox();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.exitButton = new System.Windows.Forms.Button();
+            this.summaryClearButton = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.investmentSelectionGroupBox.SuspendLayout();
             this.investorDetailsGroupBox.SuspendLayout();
             this.searchTransactionGroupBox.SuspendLayout();
             this.summaryGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonLogoPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // logoPictureBox
             // 
             this.logoPictureBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.logoPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("logoPictureBox.Image")));
-            this.logoPictureBox.Location = new System.Drawing.Point(557, 51);
+            this.logoPictureBox.Location = new System.Drawing.Point(567, 51);
             this.logoPictureBox.Name = "logoPictureBox";
             this.logoPictureBox.Size = new System.Drawing.Size(741, 212);
             this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -96,7 +96,7 @@
             this.passwordLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordLabel.Location = new System.Drawing.Point(663, 339);
+            this.passwordLabel.Location = new System.Drawing.Point(673, 339);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(220, 31);
             this.passwordLabel.TabIndex = 1;
@@ -105,7 +105,7 @@
             // passwordInputBox
             // 
             this.passwordInputBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.passwordInputBox.Location = new System.Drawing.Point(926, 339);
+            this.passwordInputBox.Location = new System.Drawing.Point(936, 339);
             this.passwordInputBox.Name = "passwordInputBox";
             this.passwordInputBox.PasswordChar = '*';
             this.passwordInputBox.Size = new System.Drawing.Size(252, 31);
@@ -115,7 +115,7 @@
             // 
             this.loginButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginButton.Location = new System.Drawing.Point(818, 420);
+            this.loginButton.Location = new System.Drawing.Point(828, 420);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(146, 47);
             this.loginButton.TabIndex = 3;
@@ -198,34 +198,40 @@
             // proceedButton
             // 
             this.proceedButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.proceedButton.BackColor = System.Drawing.Color.Thistle;
             this.proceedButton.Location = new System.Drawing.Point(653, 377);
             this.proceedButton.Name = "proceedButton";
             this.proceedButton.Size = new System.Drawing.Size(182, 51);
             this.proceedButton.TabIndex = 7;
             this.proceedButton.Text = "&Proceed";
-            this.proceedButton.UseVisualStyleBackColor = true;
+            this.toolTip.SetToolTip(this.proceedButton, "Click here to fill details");
+            this.proceedButton.UseVisualStyleBackColor = false;
             this.proceedButton.Click += new System.EventHandler(this.proceedButton_Click);
             // 
             // clearButton
             // 
             this.clearButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.clearButton.BackColor = System.Drawing.Color.Thistle;
             this.clearButton.Location = new System.Drawing.Point(442, 377);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(182, 51);
             this.clearButton.TabIndex = 6;
             this.clearButton.Text = "&Clear";
-            this.clearButton.UseVisualStyleBackColor = true;
+            this.toolTip.SetToolTip(this.clearButton, "Click here to Clear Investment Section");
+            this.clearButton.UseVisualStyleBackColor = false;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // displayButton
             // 
             this.displayButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.displayButton.BackColor = System.Drawing.Color.Thistle;
             this.displayButton.Location = new System.Drawing.Point(227, 377);
             this.displayButton.Name = "displayButton";
             this.displayButton.Size = new System.Drawing.Size(182, 51);
             this.displayButton.TabIndex = 5;
             this.displayButton.Text = "&Display";
-            this.displayButton.UseVisualStyleBackColor = true;
+            this.toolTip.SetToolTip(this.displayButton, "Click here to see loan Plans");
+            this.displayButton.UseVisualStyleBackColor = false;
             this.displayButton.Click += new System.EventHandler(this.displayButton_Click);
             // 
             // repaymentListBOX
@@ -292,13 +298,15 @@
             // 
             // submitButton
             // 
+            this.submitButton.BackColor = System.Drawing.Color.Thistle;
             this.submitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.submitButton.Location = new System.Drawing.Point(185, 386);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(182, 51);
             this.submitButton.TabIndex = 10;
             this.submitButton.Text = "&Submit";
-            this.submitButton.UseVisualStyleBackColor = true;
+            this.toolTip.SetToolTip(this.submitButton, "click here to submit you loan deatils");
+            this.submitButton.UseVisualStyleBackColor = false;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
             // 
             // emailIDTextBox
@@ -396,7 +404,6 @@
             this.searchTransactionGroupBox.Controls.Add(this.searchTransactionInputTextBox);
             this.searchTransactionGroupBox.Controls.Add(this.transactionNoSearchRadioButton);
             this.searchTransactionGroupBox.Controls.Add(this.emailSearchRadioButton);
-            this.searchTransactionGroupBox.Controls.Add(this.transactionResultsLabel);
             this.searchTransactionGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchTransactionGroupBox.Location = new System.Drawing.Point(65, 534);
             this.searchTransactionGroupBox.Name = "searchTransactionGroupBox";
@@ -410,33 +417,37 @@
             // 
             this.searchTransactionListBox.FormattingEnabled = true;
             this.searchTransactionListBox.ItemHeight = 29;
-            this.searchTransactionListBox.Location = new System.Drawing.Point(427, 55);
+            this.searchTransactionListBox.Location = new System.Drawing.Point(427, 23);
             this.searchTransactionListBox.Name = "searchTransactionListBox";
-            this.searchTransactionListBox.Size = new System.Drawing.Size(442, 323);
+            this.searchTransactionListBox.Size = new System.Drawing.Size(482, 381);
             this.searchTransactionListBox.TabIndex = 17;
             // 
             // clearTransactionButton
             // 
             this.clearTransactionButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.clearTransactionButton.BackColor = System.Drawing.Color.Thistle;
             this.clearTransactionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearTransactionButton.Location = new System.Drawing.Point(210, 306);
             this.clearTransactionButton.Name = "clearTransactionButton";
             this.clearTransactionButton.Size = new System.Drawing.Size(182, 51);
             this.clearTransactionButton.TabIndex = 16;
             this.clearTransactionButton.Text = "Cl&ear";
-            this.clearTransactionButton.UseVisualStyleBackColor = true;
+            this.toolTip.SetToolTip(this.clearTransactionButton, "Click here to Clear Search Transaction");
+            this.clearTransactionButton.UseVisualStyleBackColor = false;
             this.clearTransactionButton.Click += new System.EventHandler(this.clearTransactionButton_Click);
             // 
             // searchTransactionButton
             // 
             this.searchTransactionButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.searchTransactionButton.BackColor = System.Drawing.Color.Thistle;
             this.searchTransactionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchTransactionButton.Location = new System.Drawing.Point(17, 306);
             this.searchTransactionButton.Name = "searchTransactionButton";
             this.searchTransactionButton.Size = new System.Drawing.Size(182, 51);
             this.searchTransactionButton.TabIndex = 8;
             this.searchTransactionButton.Text = "Sear&ch";
-            this.searchTransactionButton.UseVisualStyleBackColor = true;
+            this.toolTip.SetToolTip(this.searchTransactionButton, "Click here to Search transaction");
+            this.searchTransactionButton.UseVisualStyleBackColor = false;
             this.searchTransactionButton.Click += new System.EventHandler(this.searchTransactionButton_Click);
             // 
             // searchTransactionInputTextBox
@@ -471,18 +482,9 @@
             this.emailSearchRadioButton.Text = "E-mail";
             this.emailSearchRadioButton.UseVisualStyleBackColor = true;
             // 
-            // transactionResultsLabel
-            // 
-            this.transactionResultsLabel.AutoSize = true;
-            this.transactionResultsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.transactionResultsLabel.Location = new System.Drawing.Point(598, 27);
-            this.transactionResultsLabel.Name = "transactionResultsLabel";
-            this.transactionResultsLabel.Size = new System.Drawing.Size(91, 25);
-            this.transactionResultsLabel.TabIndex = 13;
-            this.transactionResultsLabel.Text = "Results";
-            // 
             // summaryGroupBox
             // 
+            this.summaryGroupBox.Controls.Add(this.summaryClearButton);
             this.summaryGroupBox.Controls.Add(this.summaryListBox);
             this.summaryGroupBox.Controls.Add(this.summaryButton);
             this.summaryGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -500,19 +502,21 @@
             this.summaryListBox.ItemHeight = 29;
             this.summaryListBox.Location = new System.Drawing.Point(217, 23);
             this.summaryListBox.Name = "summaryListBox";
-            this.summaryListBox.Size = new System.Drawing.Size(520, 352);
+            this.summaryListBox.Size = new System.Drawing.Size(520, 381);
             this.summaryListBox.TabIndex = 18;
             // 
             // summaryButton
             // 
             this.summaryButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.summaryButton.BackColor = System.Drawing.Color.Thistle;
             this.summaryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summaryButton.Location = new System.Drawing.Point(29, 327);
+            this.summaryButton.Location = new System.Drawing.Point(18, 78);
             this.summaryButton.Name = "summaryButton";
             this.summaryButton.Size = new System.Drawing.Size(182, 51);
             this.summaryButton.TabIndex = 17;
             this.summaryButton.Text = "S&ummary";
-            this.summaryButton.UseVisualStyleBackColor = true;
+            this.toolTip.SetToolTip(this.summaryButton, "Click here to check compnay Summary");
+            this.summaryButton.UseVisualStyleBackColor = false;
             this.summaryButton.Click += new System.EventHandler(this.summaryButton_Click);
             // 
             // buttonLogoPictureBox
@@ -526,15 +530,43 @@
             this.buttonLogoPictureBox.TabStop = false;
             this.buttonLogoPictureBox.Visible = false;
             // 
-            // errorProvider1
+            // exitButton
             // 
-            this.errorProvider1.ContainerControl = this;
+            this.exitButton.BackColor = System.Drawing.Color.Thistle;
+            this.exitButton.Location = new System.Drawing.Point(1465, 1027);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(225, 49);
+            this.exitButton.TabIndex = 9;
+            this.exitButton.Text = "E&xit";
+            this.exitButton.UseVisualStyleBackColor = false;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
+            // summaryClearButton
+            // 
+            this.summaryClearButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.summaryClearButton.BackColor = System.Drawing.Color.Thistle;
+            this.summaryClearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.summaryClearButton.Location = new System.Drawing.Point(18, 155);
+            this.summaryClearButton.Name = "summaryClearButton";
+            this.summaryClearButton.Size = new System.Drawing.Size(182, 51);
+            this.summaryClearButton.TabIndex = 19;
+            this.summaryClearButton.Text = "Clea&r";
+            this.toolTip.SetToolTip(this.summaryClearButton, "Click here to Clear Summary");
+            this.summaryClearButton.UseVisualStyleBackColor = false;
+            this.summaryClearButton.Click += new System.EventHandler(this.summaryClearButton_Click);
+            // 
+            // toolTip
+            // 
+            this.toolTip.IsBalloon = true;
+            this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolTip.ToolTipTitle = "Info";
             // 
             // mad4RoadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1885, 1135);
+            this.ClientSize = new System.Drawing.Size(1905, 1220);
+            this.Controls.Add(this.exitButton);
             this.Controls.Add(this.buttonLogoPictureBox);
             this.Controls.Add(this.summaryGroupBox);
             this.Controls.Add(this.searchTransactionGroupBox);
@@ -556,7 +588,6 @@
             this.searchTransactionGroupBox.PerformLayout();
             this.summaryGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.buttonLogoPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -593,7 +624,6 @@
         private System.Windows.Forms.TextBox searchTransactionInputTextBox;
         private System.Windows.Forms.RadioButton transactionNoSearchRadioButton;
         private System.Windows.Forms.RadioButton emailSearchRadioButton;
-        private System.Windows.Forms.Label transactionResultsLabel;
         private System.Windows.Forms.Button clearTransactionButton;
         private System.Windows.Forms.Button searchTransactionButton;
         private System.Windows.Forms.Button summaryButton;
@@ -602,9 +632,11 @@
         private System.Windows.Forms.Label monthlyInterestLabel;
         private System.Windows.Forms.Label interestRateLabel;
         private System.Windows.Forms.Label periodLabel;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ListBox searchTransactionListBox;
         private System.Windows.Forms.ListBox summaryListBox;
+        private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Button summaryClearButton;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 
