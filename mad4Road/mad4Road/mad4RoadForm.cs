@@ -45,18 +45,10 @@ namespace mad4Road
         const decimal INTREST6PCT = 6.0m, INTREST6_5PCT = 6.5m, INTREST7PCT = 7.0m, INTREST7_5PCT = 7.5m, INTREST8PCT = 8.0m,
                         INTREST8_5PCT = 8.5m, INTREST9PCT = 9.0m, INTREST9_5PCT = 9.5m, INTREST8_75PCT = 8.75m, INTREST9_1PCT = 9.1m,
                         INTREST9_25PCT = 9.25m, Months = 12 ;
-
-        
-
         string rate;
-
-
         int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, loginattempt = 0, passwordAttempt = 0, yearSwitch = 0, investamounts=0, TotalCounter = 0;
-
-        
-
-        string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "", transactionId = "", lineNum, MessageBoxResult, Name, postCode;
-        decimal emi1 = 0, emi3 = 0, emi5 = 0, emi7 = 0, YearInMonth1 = 12, YearInMonth3 = 36, YearInMonth5 = 60, YearInMonth7 = 84;
+    string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "", transactionId = "", lineNum, MessageBoxResult, Name, postCode;
+        decimal emi1 = 0, emi3 = 0, emi5 = 0, emi7 = 0, yearInMonth1 = 12, yearInMonth3 = 36, yearInMonth5 = 60, yearInMonth7 = 84;
         decimal TOTALINTREST1 = 0.0m, TOTALINTREST3 = 0.0m, TOTALINTREST5 = 0.0m, TOTALINTREST7 = 0.0m, TOTALREPAYMENTS1 = 0.0m, TOTALREPAYMENTS3 = 0.0m,
                 TOTALREPAYMENTS5 = 0.0m, TOTALREPAYMENTS7 = 0.0m, investamount=0.0m,TOTALAMOUNTTAKEN=0m,OVERALLTOTALAMOUNTTAKEN=0m, OverallTotalMonths = 0,TotalMonths = 0, TotalIntrest=0m, OverallTotalIntrest=0m, Averagetotalmonths=0m, Averagetotalamounttaken=0m;
 
@@ -165,7 +157,7 @@ namespace mad4Road
             try
             {
                 investamount = decimal.Parse(investmentAmountTextBox.Text);
-                if (investamount > 9999 && investamount < 100001)
+                if (investamount >= 10000 && investamount <= 100000)
                 {
                                    
 
@@ -192,10 +184,10 @@ namespace mad4Road
                 emi3 = calculateEMI(YEAR3, INTREST6_5PCT, investAmount);
                 emi5 = calculateEMI(YEAR5, INTREST7PCT, investAmount);
                 emi7 = calculateEMI(YEAR7, INTREST7_5PCT, investAmount);
-                TOTALINTREST1=emi1*YearInMonth1;
-                TOTALINTREST3=emi3*YearInMonth3;
-                TOTALINTREST5=emi5*YearInMonth5;
-                TOTALINTREST7=emi7*YearInMonth7;
+                TOTALINTREST1=emi1*yearInMonth1;
+                TOTALINTREST3=emi3*yearInMonth3;
+                TOTALINTREST5=emi5*yearInMonth5;
+                TOTALINTREST7=emi7*yearInMonth7;
                 TOTALREPAYMENTS1 = TOTALINTREST1+investAmount;
                 TOTALREPAYMENTS3 = TOTALINTREST3+investAmount;
                 TOTALREPAYMENTS5 = TOTALINTREST5+investAmount;
@@ -216,10 +208,10 @@ namespace mad4Road
                 emi3 = calculateEMI(YEAR3, INTREST8_5PCT, investAmount);
                 emi5 = calculateEMI(YEAR5, INTREST9PCT, investAmount);
                 emi7 = calculateEMI(YEAR7, INTREST9_5PCT, investAmount);
-                TOTALINTREST1=emi1*YearInMonth1;
-                TOTALINTREST3=emi3*YearInMonth3;
-                TOTALINTREST5=emi5*YearInMonth5;
-                TOTALINTREST7=emi7*YearInMonth7;
+                TOTALINTREST1=emi1*yearInMonth1;
+                TOTALINTREST3=emi3*yearInMonth3;
+                TOTALINTREST5=emi5*yearInMonth5;
+                TOTALINTREST7=emi7*yearInMonth7;
                 TOTALREPAYMENTS1 = TOTALINTREST1+investAmount;
                 TOTALREPAYMENTS3 = TOTALINTREST3+investAmount;
                 TOTALREPAYMENTS5 = TOTALINTREST5+investAmount;
@@ -241,10 +233,10 @@ namespace mad4Road
                 emi3 = calculateEMI(YEAR3, INTREST8_75PCT, investAmount);
                 emi5 = calculateEMI(YEAR5, INTREST9_1PCT, investAmount);
                 emi7 = calculateEMI(YEAR7, INTREST9_25PCT, investAmount);
-                TOTALINTREST1=emi1*YearInMonth1;
-                TOTALINTREST3=emi3*YearInMonth3;
-                TOTALINTREST5=emi5*YearInMonth5;
-                TOTALINTREST7=emi7*YearInMonth7;
+                TOTALINTREST1=emi1*yearInMonth1;
+                TOTALINTREST3=emi3*yearInMonth3;
+                TOTALINTREST5=emi5*yearInMonth5;
+                TOTALINTREST7=emi7*yearInMonth7;
                 TOTALREPAYMENTS1 = TOTALINTREST1+investAmount;
                 TOTALREPAYMENTS3 = TOTALINTREST3+investAmount;
                 TOTALREPAYMENTS5 = TOTALINTREST5+investAmount;
@@ -285,7 +277,7 @@ namespace mad4Road
         private string getRandomTransactionNo()
         {
             string transactionNo;
-            int x = 0;
+            //int x = 0;
             Random random = new Random();
             do
             {
@@ -444,8 +436,8 @@ namespace mad4Road
                     write.WriteLine(postCodeTextBox.Text);
                     write.WriteLine(phoneNumberTextBox.Text);//skip
                     write.WriteLine(investmentAmountTextBox.Text);
-                    write.WriteLine(yearSwitch*12);
                     write.WriteLine(emiSwitch);
+                    write.WriteLine(yearSwitch*12);
                     write.WriteLine(totalRepaymentsSwitch);
                     write.WriteLine(rate);
                     //1-5 skip
@@ -598,8 +590,7 @@ namespace mad4Road
                         lineNum = FileReader.ReadLine(); //6 lines
                         TOTALAMOUNTTAKEN=decimal.Parse(lineNum);
                         OVERALLTOTALAMOUNTTAKEN+=TOTALAMOUNTTAKEN;
-                        summaryListBox.Items.Add(OVERALLTOTALAMOUNTTAKEN.ToString());
-
+                       
                         lineNum= FileReader.ReadLine();// 7 line
 
                         lineNum = FileReader.ReadLine();// 8 line
@@ -608,19 +599,23 @@ namespace mad4Road
                         TotalMonths=decimal.Parse(lineNum);
                         OverallTotalMonths+=TotalMonths;
                         Averagetotalmonths=OverallTotalMonths/TotalCounter;
-                        summaryListBox.Items.Add(Averagetotalmonths.ToString());
                         Averagetotalamounttaken=OVERALLTOTALAMOUNTTAKEN/TotalCounter;
-                        summaryListBox.Items.Add(Averagetotalamounttaken.ToString());
+                        
 
                         lineNum = FileReader.ReadLine(); // 9 line
                         TotalIntrest=decimal.Parse(lineNum);
                         OverallTotalIntrest+=TotalIntrest;
-                        summaryListBox.Items.Add("Total Interest Accruing" +" "+ OverallTotalIntrest.ToString("C2"));
                         
 
 
+                        lineNum = FileReader.ReadLine();
 
                     }
+                    summaryListBox.Items.Add("Total Amount Borrowed: "+ OVERALLTOTALAMOUNTTAKEN.ToString("C2"));
+                    summaryListBox.Items.Add("Average Duration: "+Averagetotalmonths.ToString());
+                    summaryListBox.Items.Add("Average Amount Borrowed: "+Averagetotalamounttaken.ToString("C2"));
+                    summaryListBox.Items.Add("Total Interest Accruing: " + OverallTotalIntrest.ToString("C2"));
+
                     FileReader.Close();
                 }
                

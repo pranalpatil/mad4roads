@@ -498,9 +498,9 @@
             // 
             this.summaryListBox.FormattingEnabled = true;
             this.summaryListBox.ItemHeight = 29;
-            this.summaryListBox.Location = new System.Drawing.Point(253, 23);
+            this.summaryListBox.Location = new System.Drawing.Point(217, 23);
             this.summaryListBox.Name = "summaryListBox";
-            this.summaryListBox.Size = new System.Drawing.Size(410, 352);
+            this.summaryListBox.Size = new System.Drawing.Size(520, 352);
             this.summaryListBox.TabIndex = 18;
             // 
             // summaryButton
