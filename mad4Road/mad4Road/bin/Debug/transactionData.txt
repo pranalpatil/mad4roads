@@ -1,130 +1,40 @@
-Transaction number: 98762
-Email ID: PP@gmail.com
-Investor name: Pranal
-Postal codeH23J89
-Contact number: 643739283
-Principal loan amount: 67946
-Monthly EMI: 5910.5158026378766104048194197
-Tenure of loan: 12
-Total repayment: 138872.18963165451932485783304
-Rate of interest: 8.0%
-Transaction number: 96250
-Email ID: sam@gmail.com
-Investor name: Sam
-Postal codeK45345
-Contact number: 954743445
-Principal loan amount: 43242
-Monthly EMI: 1365.0434532694749913230320503
-Tenure of loan: 36
-Total repayment: 92383.56431770109968762915381
-Rate of interest: 8.5%
-Transaction number: 98637
-Email ID: Rahul@gmail.com
-Investor name: Rahul
-Postal codeR47930
-Contact number: 7548233024
-Principal loan amount: 2543
-Monthly EMI: 
-Tenure of loan: 0
-Total repayment: 
-Rate of interest: 
-Transaction number: 28111
-Email ID: kartik@gmail.com
-Investor name: Kartik
-Postal codeK65423
-Contact number: 45345353
-Principal loan amount: 785757
-Monthly EMI: 68533.554606495420811400215508
-Tenure of loan: 12
-Total repayment: 1608159.6552779450497368025861
-Rate of interest: 8.5%
-Transaction number: 67227
-Email ID: PP@gmail.com
-Investor name: pp
-Postal codefdsf
-Contact number: fdsf
-Principal loan amount: 423242
-Monthly EMI: 36915.075167974749057353163908
-Tenure of loan: 12
-Total repayment: 866222.9020156969886882379669
-Rate of interest: 8.5%
-Transaction number: 96216
-Email ID: 
-Investor name: 
-Postal code
-Contact number: 
-Principal loan amount: 32131
-Monthly EMI: 2765.400452918266783704893913
-Tenure of loan: 12
-Total repayment: 65315.805435019201404458726956
-Rate of interest: 6.0%
-Transaction number: 99585
-Email ID: 
-Investor name: Pranal
-Postal code
-Contact number: 
-Principal loan amount: 1344
-Monthly EMI: 26.612810838229691162993931502
-Tenure of loan: 60
-Total repayment: 2940.7686502937814697796358901
-Rate of interest: 7.0%
-Transaction number: 99585
-Email ID: 
-Investor name: Pranal
-Postal code
-Contact number: 
-Principal loan amount: 1344
-Monthly EMI: 26.612810838229691162993931502
-Tenure of loan: 60
-Total repayment: 2940.7686502937814697796358901
-Rate of interest: 7.0%
-Transaction number: 99585
-Email ID: 
-Investor name: Pranal
-Postal code
-Contact number: 
-Principal loan amount: 1344
-Monthly EMI: 26.612810838229691162993931502
-Tenure of loan: 60
-Total repayment: 2940.7686502937814697796358901
-Rate of interest: 7.0%
-Transaction number: 99585
-Email ID: 
-Investor name: Pranal
-Postal code
-Contact number: 
-Principal loan amount: 1344
-Monthly EMI: 26.612810838229691162993931502
-Tenure of loan: 60
-Total repayment: 2940.7686502937814697796358901
-Rate of interest: 7.0%
-Transaction number: 99585
-Email ID: 
-Investor name: Pranal
-Postal code
-Contact number: 
-Principal loan amount: 1344
-Monthly EMI: 26.612810838229691162993931502
-Tenure of loan: 60
-Total repayment: 2940.7686502937814697796358901
-Rate of interest: 7.0%
-Transaction number: 99585
-Email ID: 
-Investor name: Pranal
-Postal code
-Contact number: 
-Principal loan amount: 1344
-Monthly EMI: 26.612810838229691162993931502
-Tenure of loan: 60
-Total repayment: 2940.7686502937814697796358901
-Rate of interest: 7.0%
-Transaction number: 99585
-Email ID: 
-Investor name: Pranal
-Postal code
-Contact number: 
-Principal loan amount: 1344
-Monthly EMI: 26.612810838229691162993931502
-Tenure of loan: 60
-Total repayment: 2940.7686502937814697796358901
-Rate of interest: 7.0%
+62366
+PP@gmail.com
+Pranal
+465789
+85499494
+20000
+1721.3285941416493627368546967
+12
+20655.94
+6.0%
+86851
+Sam@gmail.com
+Sam
+23435
+75483945
+20000
+612.98005753019842008598895586
+36
+22067.28
+6.5%
+30605
+amj@gmail.com
+ambuj
+r43434
+74382492
+43244
+3761.7276273698574771192713475
+12
+45140.73
+8.0%
+24087
+hskjdhg@gma
+PP
+gdg
+6546
+20000
+12
+1721.3285941416493627368546967
+40655.943129699792352842256360
+6.0%

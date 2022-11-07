@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.IO;
 using System.Xml.Linq;
+using System.Net.Mail;
 
 namespace mad4Road
 {
@@ -43,18 +44,21 @@ namespace mad4Road
         const int YEAR1 = 1, YEAR3 = 3, YEAR5 = 5, YEAR7 = 7;
         const decimal INTREST6PCT = 6.0m, INTREST6_5PCT = 6.5m, INTREST7PCT = 7.0m, INTREST7_5PCT = 7.5m, INTREST8PCT = 8.0m,
                         INTREST8_5PCT = 8.5m, INTREST9PCT = 9.0m, INTREST9_5PCT = 9.5m, INTREST8_75PCT = 8.75m, INTREST9_1PCT = 9.1m,
-                        INTREST9_25PCT = 9.25m, Months = 12;
+                        INTREST9_25PCT = 9.25m, Months = 12 ;
 
         
 
         string rate;
 
 
-        int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, loginattempt = 0, passwordAttempt = 0, yearSwitch = 0, investamounts=0;
-        string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "", transactionId = "";
+        int lowerBound = 40000, uperBound = 80000, selectTermIndex = 0, loginattempt = 0, passwordAttempt = 0, yearSwitch = 0, investamounts=0, TotalCounter = 0;
+
+        
+
+        string emiSwitch = "", totalInterestSwitch = "", totalRepaymentsSwitch = "", transactionId = "", lineNum, MessageBoxResult, Name, postCode;
         decimal emi1 = 0, emi3 = 0, emi5 = 0, emi7 = 0, YearInMonth1 = 12, YearInMonth3 = 36, YearInMonth5 = 60, YearInMonth7 = 84;
         decimal TOTALINTREST1 = 0.0m, TOTALINTREST3 = 0.0m, TOTALINTREST5 = 0.0m, TOTALINTREST7 = 0.0m, TOTALREPAYMENTS1 = 0.0m, TOTALREPAYMENTS3 = 0.0m,
-                TOTALREPAYMENTS5 = 0.0m, TOTALREPAYMENTS7 = 0.0m, investamount=0.0m;
+                TOTALREPAYMENTS5 = 0.0m, TOTALREPAYMENTS7 = 0.0m, investamount=0.0m,TOTALAMOUNTTAKEN=0m,OVERALLTOTALAMOUNTTAKEN=0m, OverallTotalMonths = 0,TotalMonths = 0, TotalIntrest=0m, OverallTotalIntrest=0m, Averagetotalmonths=0m, Averagetotalamounttaken=0m;
 
        
         private void loginButton_Click(object sender, EventArgs e)
@@ -118,7 +122,7 @@ namespace mad4Road
             decimal pct = 100.00m;
             decimal rate = Convert.ToDecimal(roi/12);
             decimal amount = principalAmount;
-            int period = tenure*12;
+            int period = tenure*12 ;
             decimal sum = cons + rate/pct;
 
             double numValue = Math.Pow(Decimal.ToDouble(sum), period);
@@ -134,28 +138,34 @@ namespace mad4Road
             repaymentListBOX.Items.Add(year + "Year\t" + interest + "%\t" + emi.ToString("0.00")+ "\t    " + totalInterest.ToString("0.00")+ "\t  " + totalPayment.ToString("0.00"));
         }
 
+        //public bool IsWithinRange( string name, decimal min, decimal max, decimal number )
+        //{
+            
+           
+
+        //    if (investamount > 10000 || investamount < 100000)
+        //    {
+        //        MessageBox.Show(name + " must be between " + min + " and " + max + ".", "Entry Error");
+               
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Please enter ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        //        investmentAmountTextBox.SelectAll();
+        //        investmentAmountTextBox.Focus();
+                
+        //    }
+        //    return true;
+        //}
         private void displayButton_Click(object sender, EventArgs e)
         {
-            //HoursWorked = decimal.Parse(HoursWorkedTextBox.Text);
+           
             
-
-
-            //double calculateRepayments(int)
-            //repayment methd Return
-            //create 2 more methd
-            if (string.IsNullOrEmpty(investmentAmountTextBox.Text))
-            {
-                
-                MessageBox.Show("Please enter ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                investmentAmountTextBox.SelectAll();
-                investmentAmountTextBox.Focus();
-                return;
-            }
-            //Validating the attendees for invalid Data input
             try
             {
                 investamount = decimal.Parse(investmentAmountTextBox.Text);
-                if (investamount>0)
+                if (investamount > 9999 && investamount < 100001)
                 {
                                    
 
@@ -277,10 +287,19 @@ namespace mad4Road
             string transactionNo;
             int x = 0;
             Random random = new Random();
-
-            return random.Next(10000, 100000).ToString();
+            do
+            {
+                return random.Next(10000, 100000).ToString();
+            }
+            while (!alreadyrecord(transactionNo));
+            
         }
 
+        private bool alreadyrecord(string NUM)
+        {
+            bool found = false;
+            return found;
+        }
         private void proceedButton_Click(object sender, EventArgs e)
         {
 
@@ -359,57 +378,110 @@ namespace mad4Road
             }
         }
 
-        public bool invalid_emailid(string em)
+       
+        public bool invalid_emailid(string emailaddress)
         {
-            Regex check = new Regex(@"^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$");
-            bool valid = false;
-            valid =check.IsMatch(em);
-            if (valid==true)
+            
+            try
             {
-                return valid;
+                MailAddress m = new MailAddress(emailaddress);
 
+                return true;
             }
-            else
+            catch (FormatException)
             {
                 MessageBox.Show("email is not in correct format");
-                return valid;
+                return false;
             }
         }
         private void submitButton_Click(object sender, EventArgs e)
         {
-             if (investorNameTextBox.Text=="")
+            Name=investorNameTextBox.Text;
+            postCode=postCodeTextBox.Text;
+            if (investorNameTextBox.Text == "")
             {
-                MessageBox.Show("Please enter the valid Details.");
+                // first name was incorrect
+                MessageBox.Show("Please enter Name", "Message", MessageBoxButtons.OK);
+                investorNameTextBox.Focus();
+                return;
+            }
+            if (postCodeTextBox.Text == "")
+            {
+                // first name was incorrect
+                MessageBox.Show("Please enter Post Code", "Message", MessageBoxButtons.OK);
+                investorNameTextBox.Focus();
+                return;
+            }
+            if (phoneNumberTextBox.Text == "")
+            {
+                // first name was incorrect
+                MessageBox.Show("Please enter Phone Number", "Message", MessageBoxButtons.OK);
+                investorNameTextBox.Focus();
+                return;
+            }
+
+            if (emailIDTextBox.Text == "")
+            {
+                // first name was incorrect
+                MessageBox.Show("Please enter Email ID", "Message", MessageBoxButtons.OK);
+                investorNameTextBox.Focus();
+                return;
+
             }
             else
             {
+                bool emailaddress = invalid_emailid(emailIDTextBox.Text);
+            }
+            DialogResult dialogResult = MessageBox.Show("Name: "+Name+"Post Code: "+postCode, "Error", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                StreamWriter write = File.AppendText(filepath);
+                using (write)
+                {
+                    write.WriteLine(transactionNoLabel.Text);
+                    write.WriteLine(emailIDTextBox.Text);
+                    write.WriteLine(investorNameTextBox.Text);
+                    write.WriteLine(postCodeTextBox.Text);
+                    write.WriteLine(phoneNumberTextBox.Text);//skip
+                    write.WriteLine(investmentAmountTextBox.Text);
+                    write.WriteLine(yearSwitch*12);
+                    write.WriteLine(emiSwitch);
+                    write.WriteLine(totalRepaymentsSwitch);
+                    write.WriteLine(rate);
+                    //1-5 skip
+                    //6-RW
+                    //7skip
+                    //8WR
+                    //9WR
+
+                    //write.WriteLine("Transaction number: " + transactionNoLabel.Text);
+                    //write.WriteLine("Email ID: " + emailIDTextBox.Text);
+                    //write.WriteLine("Investor name: " + investorNameTextBox.Text);
+                    //write.WriteLine("Postal code" + postCodeTextBox.Text);
+                    //write.WriteLine("Contact number: " + phoneNumberTextBox.Text);
+                    //write.WriteLine("Principal loan amount: " + investmentAmountTextBox.Text);
+                    //write.WriteLine("Monthly EMI: {0}", emiSwitch);
+                    //write.WriteLine("Tenure of loan: "+ yearSwitch*12);
+                    //write.WriteLine("Total repayment: {0}", totalRepaymentsSwitch);
+                    //write.WriteLine("Rate of interest: " + rate);
+                }
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                
+            }
+
+
+            
+
+
                 
 
-            }
-            //bool n = invalid_name(investorNameTextBox.Text);
-            //bool em = invalid_emailid(emailIDTextBox.Text);
 
 
-
-            StreamWriter write = File.AppendText(filepath);
-            using (write)
-            {
-                write.WriteLine("Transaction number: " + transactionNoLabel.Text);
-                write.WriteLine("Email ID: " + emailIDTextBox.Text);
-                write.WriteLine("Investor name: " + investorNameTextBox.Text);
-                write.WriteLine("Postal code" + postCodeTextBox.Text);
-                write.WriteLine("Contact number: " + phoneNumberTextBox.Text);
-                write.WriteLine("Principal loan amount: " + investmentAmountTextBox.Text);
-                write.WriteLine("Monthly EMI: {0}", emiSwitch);
-                write.WriteLine("Tenure of loan: "+ yearSwitch*12);
-                write.WriteLine("Total repayment: {0}", totalRepaymentsSwitch);
-                write.WriteLine("Rate of interest: " + rate);
-            }
-
-
-
-            searchTransactionGroupBox.Enabled=true;
-
+                searchTransactionGroupBox.Enabled=true;
+          
+            
         }
 
         
@@ -431,7 +503,7 @@ namespace mad4Road
                     currentlines=tranID.ReadLine();
                     while (currentlines!=null)
                     {
-                        if (currentlines.Equals("Transaction number: " + searchtranId))
+                        if (currentlines.Equals(searchtranId))
                         {
                             for (int i = 0; i < 9; i++)
                             {
@@ -452,68 +524,39 @@ namespace mad4Road
             else if (emailSearchRadioButton.Checked==true)
             {
                 string searchemailId = searchTransactionInputTextBox.Text;
-
-
-                //var pattern = @"Transaction number:\s*\d+\s*\nEmail ID: " + searchemailId + "(.|\n)*";
-                //string information = System.IO.File.ReadAllText(filepath);
-                //MatchCollection matches = Regex.Matches(information, pattern);
-
-                //foreach (Match match in matches)
-                //{
-                //    //Console.WriteLine(match.Groups[1].Value);
-                //    var stringList = match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None);
-                //    foreach ()
-                //    if (match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None))
-                //    {
-                //        searchTransactionListBox.Items.Add("Transaction" + match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[0]);
-                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[1]);
-                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[2]);
-                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[3]);
-                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[4]);
-                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[5]);
-                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[6]);
-                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[7]);
-                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[8]);
-                //        searchTransactionListBox.Items.Add(match.Value.Split(new[] { "Transaction" }, StringSplitOptions.None)[1].Split('\n')[9]);
-                //    }
-
-                //}
-
+                
                 using (tranID)
                 {
                     string currentlines;
                     currentlines = tranID.ReadLine();
-                    string previousLine1 = "";
+                    //string previousLine1 = "";
 
-                    while(currentlines != null)
+                    while (currentlines != null)
                     {
-                        string comparisonString = "Email ID: " + searchemailId;
+                        string comparisonString =searchemailId;
                         if (currentlines.Equals(comparisonString))
                         {
-
-                            searchTransactionListBox.Items.Add(comparisonString);
-                            for (int i = 0; i < 7; i++)
-                            {
+                           for (int i = 0; i < 7; i++)
+                           {
                                 searchTransactionListBox.Items.Add(tranID.ReadLine());
-                            }
-                            break;
+                               
+                                return;
+                                                                        
+                           }
+                                
+                            
+                            
                         }
                         else
                         {
                             currentlines=tranID.ReadLine();
                         }
-                    }
-                    
 
-                    //if (currentlines.Contains(searchemailId))
-                    //{
-                    //    searchTransactionListBox.Items.Add("Email ID: " + searchemailId);
-                    //    //for (int i = 0; i < 7; i++)
-                    //    //{
-                    //    //    searchTransactionListBox.Items.Add(tranID.ReadLine());
-                    //    //}
-                    //}
-         
+                    }
+
+
+
+
                 }
 
             }
@@ -523,38 +566,9 @@ namespace mad4Road
                 MessageBox.Show("select one");
             }
 
-            
-
-
-            //try
-            //{
-            //    string transactionNo = searchTransactionInputTextBox.Text;
-            //    StreamReader InputFile;
-            //    string information = System.IO.File.ReadAllText(filepath);
-            //    searchTransactionListBox.Items.Clear();
-
-            //    var pattern = @"Transaction number: " + transactionNo + "(.|\n)*" + @"\s*(Transaction number: |.)";
-            //    var match = Regex.Match(information, pattern);
-
-            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[0]);
-            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[1]);
-            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[2]);
-            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[3]);
-            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[4]);
-            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[5]);
-            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[6]);
-            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[7]);
-            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[8]);
-            //    searchTransactionListBox.Items.Add(match.Value.ToString().Split('\n')[9]);
-
-            //    //InputFile.Close();
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("wrong");
-            //}
 
             
+
 
         }
         private void clearTransactionButton_Click(object sender, EventArgs e)
@@ -565,6 +579,57 @@ namespace mad4Road
             transactionNoSearchRadioButton.Checked=false;
             emailSearchRadioButton.Checked=false;
 
+      
+        }
+        private void summaryButton_Click(object sender, EventArgs e)
+        {
+            StreamReader FileReader;
+            try 
+            {
+                using (FileReader= new StreamReader(filepath)) ;
+                FileReader = File.OpenText(filepath);
+                {
+                    while (!FileReader.EndOfStream)
+                    {
+                        for (int line = 1; line <=5; line++) 
+                        {
+                            FileReader.ReadLine();
+                        }
+                        lineNum = FileReader.ReadLine(); //6 lines
+                        TOTALAMOUNTTAKEN=decimal.Parse(lineNum);
+                        OVERALLTOTALAMOUNTTAKEN+=TOTALAMOUNTTAKEN;
+                        summaryListBox.Items.Add(OVERALLTOTALAMOUNTTAKEN.ToString());
+
+                        lineNum= FileReader.ReadLine();// 7 line
+
+                        lineNum = FileReader.ReadLine();// 8 line
+                        TotalCounter++;
+
+                        TotalMonths=decimal.Parse(lineNum);
+                        OverallTotalMonths+=TotalMonths;
+                        Averagetotalmonths=OverallTotalMonths/TotalCounter;
+                        summaryListBox.Items.Add(Averagetotalmonths.ToString());
+                        Averagetotalamounttaken=OVERALLTOTALAMOUNTTAKEN/TotalCounter;
+                        summaryListBox.Items.Add(Averagetotalamounttaken.ToString());
+
+                        lineNum = FileReader.ReadLine(); // 9 line
+                        TotalIntrest=decimal.Parse(lineNum);
+                        OverallTotalIntrest+=TotalIntrest;
+                        summaryListBox.Items.Add("Total Interest Accruing" +" "+ OverallTotalIntrest.ToString("C2"));
+                        
+
+
+
+                    }
+                    FileReader.Close();
+                }
+               
+            }
+            catch
+            {
+
+            }
+            
         }
     }
 

@@ -59,6 +59,7 @@
             this.transactionNameLabel = new System.Windows.Forms.Label();
             this.investorNameLabel = new System.Windows.Forms.Label();
             this.searchTransactionGroupBox = new System.Windows.Forms.GroupBox();
+            this.searchTransactionListBox = new System.Windows.Forms.ListBox();
             this.clearTransactionButton = new System.Windows.Forms.Button();
             this.searchTransactionButton = new System.Windows.Forms.Button();
             this.searchTransactionInputTextBox = new System.Windows.Forms.TextBox();
@@ -66,11 +67,10 @@
             this.emailSearchRadioButton = new System.Windows.Forms.RadioButton();
             this.transactionResultsLabel = new System.Windows.Forms.Label();
             this.summaryGroupBox = new System.Windows.Forms.GroupBox();
+            this.summaryListBox = new System.Windows.Forms.ListBox();
             this.summaryButton = new System.Windows.Forms.Button();
             this.buttonLogoPictureBox = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.searchTransactionListBox = new System.Windows.Forms.ListBox();
-            this.summaryListBox = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.investmentSelectionGroupBox.SuspendLayout();
             this.investorDetailsGroupBox.SuspendLayout();
@@ -406,6 +406,15 @@
             this.searchTransactionGroupBox.Text = "Search Transaction";
             this.searchTransactionGroupBox.Visible = false;
             // 
+            // searchTransactionListBox
+            // 
+            this.searchTransactionListBox.FormattingEnabled = true;
+            this.searchTransactionListBox.ItemHeight = 29;
+            this.searchTransactionListBox.Location = new System.Drawing.Point(427, 55);
+            this.searchTransactionListBox.Name = "searchTransactionListBox";
+            this.searchTransactionListBox.Size = new System.Drawing.Size(442, 323);
+            this.searchTransactionListBox.TabIndex = 17;
+            // 
             // clearTransactionButton
             // 
             this.clearTransactionButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -485,6 +494,15 @@
             this.summaryGroupBox.Text = "Summary";
             this.summaryGroupBox.Visible = false;
             // 
+            // summaryListBox
+            // 
+            this.summaryListBox.FormattingEnabled = true;
+            this.summaryListBox.ItemHeight = 29;
+            this.summaryListBox.Location = new System.Drawing.Point(253, 23);
+            this.summaryListBox.Name = "summaryListBox";
+            this.summaryListBox.Size = new System.Drawing.Size(410, 352);
+            this.summaryListBox.TabIndex = 18;
+            // 
             // summaryButton
             // 
             this.summaryButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -495,6 +513,7 @@
             this.summaryButton.TabIndex = 17;
             this.summaryButton.Text = "S&ummary";
             this.summaryButton.UseVisualStyleBackColor = true;
+            this.summaryButton.Click += new System.EventHandler(this.summaryButton_Click);
             // 
             // buttonLogoPictureBox
             // 
@@ -510,24 +529,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // searchTransactionListBox
-            // 
-            this.searchTransactionListBox.FormattingEnabled = true;
-            this.searchTransactionListBox.ItemHeight = 29;
-            this.searchTransactionListBox.Location = new System.Drawing.Point(427, 55);
-            this.searchTransactionListBox.Name = "searchTransactionListBox";
-            this.searchTransactionListBox.Size = new System.Drawing.Size(442, 323);
-            this.searchTransactionListBox.TabIndex = 17;
-            // 
-            // summaryListBox
-            // 
-            this.summaryListBox.FormattingEnabled = true;
-            this.summaryListBox.ItemHeight = 29;
-            this.summaryListBox.Location = new System.Drawing.Point(253, 23);
-            this.summaryListBox.Name = "summaryListBox";
-            this.summaryListBox.Size = new System.Drawing.Size(410, 352);
-            this.summaryListBox.TabIndex = 18;
             // 
             // mad4RoadForm
             // 
