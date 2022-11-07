@@ -272,7 +272,7 @@ namespace mad4Road
                         break;
 
                 }
-                // perfomaing once repayment box is 
+                // perfomaing below once repayment box is selected
                 investorDetailsGroupBox.Enabled=true;
                 investmentSelectionGroupBox.Enabled=false;
                 transactionNoLabel.Text=getRandomTransactionNo();
@@ -287,6 +287,7 @@ namespace mad4Road
         // Method where email id is validating.
         private static Regex invalid_emailid()
         {
+            // Validation so that user cannot add Raw data into feild.
             string regexPattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
                 + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"
                 + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
@@ -299,7 +300,7 @@ namespace mad4Road
         // it store the data into text file.
         private void submitButton_Click(object sender, EventArgs e)
         {
-            
+            // storing investor data into variable. 
             Name =investorNameTextBox.Text;
             postCode=postCodeTextBox.Text;
             phoneNo=phoneNumberTextBox.Text;
@@ -354,6 +355,7 @@ namespace mad4Road
                     write.WriteLine(rate); // Storing the Interest
 
                 }
+                //peform once data write into file. 
                 investmentSelectionGroupBox.Enabled=true;
                 repaymentListBOX.Items.Clear();
                 investmentAmountTextBox.Enabled=true;
@@ -392,15 +394,15 @@ namespace mad4Road
                         {
                             for (int i = 0; i < 1; i++)
                             {
-                                searchTransactionListBox.Items.Add("Email ID: " +tranID.ReadLine()); 
-                                searchTransactionListBox.Items.Add("Name: " + tranID.ReadLine());
-                                searchTransactionListBox.Items.Add("Postal code: " + tranID.ReadLine());
-                                searchTransactionListBox.Items.Add("Contact number: " + tranID.ReadLine());
-                                searchTransactionListBox.Items.Add("Borrowed amount: " + tranID.ReadLine());
-                                searchTransactionListBox.Items.Add("Monthly EMI: " + tranID.ReadLine());
-                                searchTransactionListBox.Items.Add("Tenure: " + tranID.ReadLine());
-                                searchTransactionListBox.Items.Add("Total repayment: " + tranID.ReadLine());
-                                searchTransactionListBox.Items.Add("Rate of interest: " +tranID.ReadLine());
+                                searchTransactionListBox.Items.Add("Email ID: " +tranID.ReadLine()); // Printing the Email ID
+                                searchTransactionListBox.Items.Add("Name: " + tranID.ReadLine()); // Printing the name
+                                searchTransactionListBox.Items.Add("Postal code: " + tranID.ReadLine()); // Printing the Post Code
+                                searchTransactionListBox.Items.Add("Contact number: " + tranID.ReadLine());// Printing the contact No
+                                searchTransactionListBox.Items.Add("Borrowed amount: " + tranID.ReadLine());// Printing the Borrowed amount
+                                searchTransactionListBox.Items.Add("Monthly EMI: " + tranID.ReadLine());// Printing the EMI
+                                searchTransactionListBox.Items.Add("Tenure: " + tranID.ReadLine()); // Printing the Tenure
+                                searchTransactionListBox.Items.Add("Total repayment: " + tranID.ReadLine()); // Printing the Repayments
+                                searchTransactionListBox.Items.Add("Rate of interest: " +tranID.ReadLine());// Printing the Interest
                                 searchTransactionListBox.Items.Add("\n\n");
 
                             }
@@ -435,15 +437,15 @@ namespace mad4Road
                                 if (checkMail.Contains(searchemailId))
                                 {
                                     searchTransactionListBox.Items.Add("Transaction number: " + transID);
-                                    searchTransactionListBox.Items.Add("Email ID: " + checkMail);
-                                    searchTransactionListBox.Items.Add("Name: " + FileRead.ReadLine());
-                                    searchTransactionListBox.Items.Add("Postal code: " + FileRead.ReadLine());
-                                    searchTransactionListBox.Items.Add("Contact number: " + FileRead.ReadLine());
-                                    searchTransactionListBox.Items.Add("Borrowed amount: " + FileRead.ReadLine());
-                                    searchTransactionListBox.Items.Add("Monthly EMI: " + FileRead.ReadLine());
-                                    searchTransactionListBox.Items.Add("Tenure: " + FileRead.ReadLine());
-                                    searchTransactionListBox.Items.Add("Total repayment: " + FileRead.ReadLine());
-                                    searchTransactionListBox.Items.Add("Rate of interest: " + FileRead.ReadLine());
+                                    searchTransactionListBox.Items.Add("Email ID: " + checkMail);// Printing the Email ID
+                                    searchTransactionListBox.Items.Add("Name: " + FileRead.ReadLine());// Printing the name
+                                    searchTransactionListBox.Items.Add("Postal code: " + FileRead.ReadLine());// Printing the Post Code
+                                    searchTransactionListBox.Items.Add("Contact number: " + FileRead.ReadLine());// Printing the contact No
+                                    searchTransactionListBox.Items.Add("Borrowed amount: " + FileRead.ReadLine());// Printing the Borrowed amount
+                                    searchTransactionListBox.Items.Add("Monthly EMI: " + FileRead.ReadLine());// Printing the EMI
+                                    searchTransactionListBox.Items.Add("Tenure: " + FileRead.ReadLine());// Printing the Tenure
+                                    searchTransactionListBox.Items.Add("Total repayment: " + FileRead.ReadLine());// Printing the Repayments
+                                    searchTransactionListBox.Items.Add("Rate of interest: " + FileRead.ReadLine());// Printing the Interest
                                     searchTransactionListBox.Items.Add("\n\n");
                                 }
                                 else
@@ -542,11 +544,13 @@ namespace mad4Road
 
 
         }
+        // Exiting the Application on exit button.
         private void exitButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        // Clearing the feild on summary clear button. 
         private void summaryClearButton_Click(object sender, EventArgs e)
         {
             summaryListBox.Items.Clear();
