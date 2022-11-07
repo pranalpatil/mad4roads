@@ -85,7 +85,7 @@
             // 
             this.logoPictureBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.logoPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("logoPictureBox.Image")));
-            this.logoPictureBox.Location = new System.Drawing.Point(540, 51);
+            this.logoPictureBox.Location = new System.Drawing.Point(298, 51);
             this.logoPictureBox.Name = "logoPictureBox";
             this.logoPictureBox.Size = new System.Drawing.Size(741, 212);
             this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -97,7 +97,7 @@
             this.passwordLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordLabel.Location = new System.Drawing.Point(646, 339);
+            this.passwordLabel.Location = new System.Drawing.Point(404, 339);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(220, 31);
             this.passwordLabel.TabIndex = 1;
@@ -106,7 +106,7 @@
             // passwordInputBox
             // 
             this.passwordInputBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.passwordInputBox.Location = new System.Drawing.Point(909, 339);
+            this.passwordInputBox.Location = new System.Drawing.Point(667, 339);
             this.passwordInputBox.Name = "passwordInputBox";
             this.passwordInputBox.PasswordChar = '*';
             this.passwordInputBox.Size = new System.Drawing.Size(252, 31);
@@ -116,7 +116,7 @@
             // 
             this.loginButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginButton.Location = new System.Drawing.Point(801, 420);
+            this.loginButton.Location = new System.Drawing.Point(559, 420);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(146, 47);
             this.loginButton.TabIndex = 3;
@@ -582,7 +582,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1850, 1476);
+            this.ClientSize = new System.Drawing.Size(1367, 729);
             this.Controls.Add(this.Notelabel);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.buttonLogoPictureBox);

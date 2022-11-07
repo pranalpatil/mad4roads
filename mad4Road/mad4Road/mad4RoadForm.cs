@@ -1,9 +1,13 @@
-﻿/* Student Name: Pranal Patil
- * Student ID: 22222293
- * Date:07/11/2022
- * Assignment: 3
- * Assignment: Create an Application for Term Loan where we
- */
+﻿/* Student Name:Pranal Patil
+ * Student ID:  22222293
+ * Date:        07/11/2022
+ * Assignment:  3
+ * Assignment:  Financial services provider Mad4Money Bank Corp., your client, provides 
+                a range of financial products to its clients' consumers. One of them is a vehicle 
+                loan program called "Mad4Road," which allows a customer to borrow between €10,000 and €100,000
+                over terms of up to 7 years. The amount and length of each client's requested loan determine the 
+                interest rate that will be given. Your business has been hired to construct a user-friendly application 
+                that will enable staff to handle customer transactions for this product.*/
 
 
 using System;
