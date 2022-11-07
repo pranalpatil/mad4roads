@@ -57,8 +57,8 @@ namespace mad4Road
         decimal emi1 = 0, emi3 = 0, emi5 = 0, emi7 = 0, yearInMonth1 = 12, yearInMonth3 = 36, yearInMonth5 = 60, yearInMonth7 = 84;
         decimal totalInterest = 0.0m, totalInterest3 = 0.0m, totalInterest5 = 0.0m, totalInterest7 = 0.0m, totalRepayments1 = 0.0m, totalRepayments3 = 0.0m,
                 totalRepayments5 = 0.0m, totalRepayments7 = 0.0m, investamount=0.0m,totalAmountTaken=0m,overallTotalAmountTaken=0m, overalltotalMonths = 0,totalMonths = 0, totalInterest1=0m, overallTotalInterest1=0m, averageTotalMonths=0m, averageTotalAmountTaken=0m;
-
-       // Login button use to give access of application and increase the size of application.
+        static Regex validateID = invalid_emailid();
+        // Login button use to give access of application and increase the size of applications
         private void loginButton_Click(object sender, EventArgs e)
         {
             if (passwordInputBox.Text != PASSWORD) // Checking if the password is matching.
@@ -295,7 +295,7 @@ namespace mad4Road
             return new Regex(regexPattern, RegexOptions.IgnoreCase);
         }
 
-        static Regex validateID = invalid_emailid();
+        
 
         // it store the data into text file.
         private void submitButton_Click(object sender, EventArgs e)
