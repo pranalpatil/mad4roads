@@ -66,11 +66,11 @@
             this.transactionNoSearchRadioButton = new System.Windows.Forms.RadioButton();
             this.emailSearchRadioButton = new System.Windows.Forms.RadioButton();
             this.summaryGroupBox = new System.Windows.Forms.GroupBox();
+            this.summaryClearButton = new System.Windows.Forms.Button();
             this.summaryListBox = new System.Windows.Forms.ListBox();
             this.summaryButton = new System.Windows.Forms.Button();
             this.buttonLogoPictureBox = new System.Windows.Forms.PictureBox();
             this.exitButton = new System.Windows.Forms.Button();
-            this.summaryClearButton = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.investmentSelectionGroupBox.SuspendLayout();
@@ -496,6 +496,20 @@
             this.summaryGroupBox.Text = "Summary";
             this.summaryGroupBox.Visible = false;
             // 
+            // summaryClearButton
+            // 
+            this.summaryClearButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.summaryClearButton.BackColor = System.Drawing.Color.Thistle;
+            this.summaryClearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.summaryClearButton.Location = new System.Drawing.Point(18, 155);
+            this.summaryClearButton.Name = "summaryClearButton";
+            this.summaryClearButton.Size = new System.Drawing.Size(182, 51);
+            this.summaryClearButton.TabIndex = 19;
+            this.summaryClearButton.Text = "Clea&r";
+            this.toolTip.SetToolTip(this.summaryClearButton, "Click here to Clear Summary");
+            this.summaryClearButton.UseVisualStyleBackColor = false;
+            this.summaryClearButton.Click += new System.EventHandler(this.summaryClearButton_Click);
+            // 
             // summaryListBox
             // 
             this.summaryListBox.FormattingEnabled = true;
@@ -538,22 +552,9 @@
             this.exitButton.Size = new System.Drawing.Size(225, 49);
             this.exitButton.TabIndex = 9;
             this.exitButton.Text = "E&xit";
+            this.toolTip.SetToolTip(this.exitButton, "Click here to Exit Application");
             this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
-            // 
-            // summaryClearButton
-            // 
-            this.summaryClearButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.summaryClearButton.BackColor = System.Drawing.Color.Thistle;
-            this.summaryClearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summaryClearButton.Location = new System.Drawing.Point(18, 155);
-            this.summaryClearButton.Name = "summaryClearButton";
-            this.summaryClearButton.Size = new System.Drawing.Size(182, 51);
-            this.summaryClearButton.TabIndex = 19;
-            this.summaryClearButton.Text = "Clea&r";
-            this.toolTip.SetToolTip(this.summaryClearButton, "Click here to Clear Summary");
-            this.summaryClearButton.UseVisualStyleBackColor = false;
-            this.summaryClearButton.Click += new System.EventHandler(this.summaryClearButton_Click);
             // 
             // toolTip
             // 

@@ -377,17 +377,17 @@ namespace mad4Road
                 StreamWriter write = File.AppendText(filepath);
                 using (write)
                 {
-                    write.WriteLine(transactionNoLabel.Text);
-                    write.WriteLine(emailIDTextBox.Text);
-                    write.WriteLine(investorNameTextBox.Text);
-                    write.WriteLine(postCodeTextBox.Text);
-                    write.WriteLine(phoneNumberTextBox.Text);
-                    write.WriteLine(investmentAmountTextBox.Text);
-                    write.WriteLine(emiSwitch);
-                    write.WriteLine(yearSwitch*12);
-                    write.WriteLine(totalRepaymentsSwitch);
-                    write.WriteLine(rate);
-                    
+                    write.WriteLine(transactionNoLabel.Text); // Storing the transaction ID
+                    write.WriteLine(emailIDTextBox.Text); // Storing the Emailn ID
+                    write.WriteLine(investorNameTextBox.Text);// Storing the name
+                    write.WriteLine(postCodeTextBox.Text);// Storing the Post Code
+                    write.WriteLine(phoneNumberTextBox.Text);// Storing the Phone Number
+                    write.WriteLine(investmentAmountTextBox.Text);// Storing the investment amount
+                    write.WriteLine(emiSwitch); // Storing the EMI 
+                    write.WriteLine(yearSwitch*12); // Storing the Year of loan
+                    write.WriteLine(totalRepaymentsSwitch);// Storing the Total Repayments
+                    write.WriteLine(rate); // Storing the Interest
+
                 }
                 investmentSelectionGroupBox.Enabled=true;
                 repaymentListBOX.Items.Clear();
